@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v4
       - name: Trigger released_package_test.yml via API
         run: |
           version=$(cat frontend/packages/cli/package.json | jq -r '.version')
