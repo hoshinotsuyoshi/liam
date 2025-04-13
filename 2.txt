@@ -1,0 +1,98 @@
+あなたの役割は、LLMに投入するSYSTEM_PROMPTを調整し改善することです。
+SYSTEM_PROMPTはfrontend/packages/jobs/src/prompts/generateReview/generateReview.tsに存在します。これを編集し、改善してください。
+
+SYSTEM_PROMPTの評価は、以下の評価軸で評価します。
+
+- すべての要素において、"test-by-js"と"test-by-llm"が1以上であること
+    - その点数となった理由は"test-by-js-comment", "test-by-llm-comment" に書いてあります
+
+改善のプロセス例を挙げます。
+
+<改善のプロセス例1 ここから>--------
+
+このプロジェクトで現在、私が
+$ pnpm --filter=@liam-hq/prompt-test test
+を実行すると、以下のような出力を得ます。
+
+```
+$ pnpm --filter=@liam-hq/prompt-test test
+
+> @liam-hq/prompt-test@0.1.0 test /Users/hoshino/ghq/github.com/hoshinotsuyoshi/liam/frontend/packages/prompt-test
+> tsx src/index.ts
+
+processing liam-hq/liam/pull/1033 ...
+processing liam-hq/liam/pull/1105 ...
+processing liam-hq/liam/pull/1322 ...
+processing liam-hq/liam/pull/1304 ...
+processing liam-hq/liam/pull/1055 ...
+waiting for scores ...
+waiting for scores ...
+scoreResult [
+  {
+    "testCaseName": "liam-hq/liam/pull/1055",
+    "traceId": "d934d3b4-827b-4543-9ccf-085184ccd489",
+    "test-by-js": 1,
+    "test-by-js-comment": "✅ - Positive feedback is present\n✅ - The generation must be less than 3 sentences\n✅ - The generation must be less than 80 words",
+    "test-by-llm": 0.9,
+    "test-by-llm-comment": "The report identifies potential data loss risks associated with removing the GitHubDocFilePath model, as highlighted in the 'Migration Safety' and 'Data Integrity' feedbacks. The 'bodyMarkdown' also mentions the risk to data integrity. Therefore, the report directly addresses the assertion about the risk of data loss."
+  },
+  {
+    "testCaseName": "liam-hq/liam/pull/1304",
+    "traceId": "7f3667bd-53c3-403d-85ea-0a79bda02f94",
+    "test-by-js": 1,
+    "test-by-js-comment": "✅ - Positive feedback is present\n✅ - The generation must be less than 3 sentences\n✅ - The generation must be less than 80 words",
+    "test-by-llm": 1,
+    "test-by-llm-comment": "The report explicitly mentions Row Level Security (RLS) and its implementation. The assertion asks if the report mentions RLS. Therefore, the report fully addresses the assertion."
+  },
+  {
+    "testCaseName": "liam-hq/liam/pull/1322",
+    "traceId": "357f8820-67df-4eb7-ae35-4e6b1f938490",
+    "test-by-js": 1,
+    "test-by-js-comment": "✅ - Positive feedback is present\n✅ - The generation must be less than 3 sentences\n✅ - The generation must be less than 80 words",
+    "test-by-llm": 1,
+    "test-by-llm-comment": "The report explicitly mentions renaming the ReviewIssue table to ReviewFeedback, which aligns perfectly with the assertion that the report mentions renaming a table. Therefore, the score is 1.0."
+  },
+  {
+    "testCaseName": "liam-hq/liam/pull/1105",
+    "traceId": "1085bf27-5668-4e5c-8b4b-8f8574cbf7ce",
+    "test-by-js": 1,
+    "test-by-js-comment": "✅ - Positive feedback is present\n✅ - The generation must be less than 3 sentences\n✅ - The generation must be less than 80 words",
+    "test-by-llm": 0,
+    "test-by-llm-comment": "The query asks that suggestions like \"Implement a migration plan to properly backfill existin records when new columns are added\" should be treated as WARNING rather than CRITICAL. The feedback with description \"Adding the `branchName` column as NOT NULL without a default value poses a risk if the `KnowledgeSuggestion` table is not empty, potentially causing migration failures.\" has severity CRITICAL. Since the query asks for such cases to be treated as WARNING, the generation fails to address the query's assertion."
+  },
+  {
+    "testCaseName": "liam-hq/liam/pull/1033",
+    "traceId": "a7b47a9f-3d28-4aa1-b942-1cd757563a5e",
+    "test-by-js": 1,
+    "test-by-js-comment": "✅ - The file path must present in suggestion snippets\n✅ - The sql expression must present in suggestion snippets\n✅ - Positive feedback is present\n✅ - The generation must be less than 3 sentences\n✅ - The generation must be less than 80 words",
+    "test-by-llm": 1,
+    "test-by-llm-comment": "The report warns about adding a NOT NULL column `branchName` to the `KnowledgeSuggestion` table without ensuring the table is empty or setting a default value. This aligns with the assertion that the report mentions ensuring the table is empty before the migration. Therefore, the score is 1.0."
+  }
+]
+```
+
+今回の場合でいうと、"testCaseName": "liam-hq/liam/pull/1105"の"test-by-llm"が0点であり、改善の必要があります。
+
+以下のように考えてください
+
+- "testCaseName": "liam-hq/liam/pull/1105"の"test-by-llm-comment"の内容を確認する
+- frontend/packages/prompt-test/src/fixtures/github.com/liam-hq/liam/pull/1105/fixture.json と SYSTEM_PROMPT の内容を確認し、frontend/packages/prompt-test/src/fixtures/github.com/liam-hq/liam/pull/1105/fixture.jsonの assertで述べているような内容になるようにSYSTEM_PROMPTを修正する。
+- 他のテストケースに影響を与えないように、変更は、慎重に、必要最低限にする
+
+
+<改善のプロセス例1 ここまで>--------
+
+<改善のプロセス例2 ここから>--------
+
+同様に、test-by-jsが1未満になってしまうことがあります。
+その場合は、test-by-js-commentおよびfrontend/packages/prompt-test/src/testCases.tsの内容を確認し、同様にSYSTEM_PROMPTを調整してください。
+
+<改善のプロセス例2 ここまで>--------
+
+実践してみてください:
+
+1. pnpm --filter=@liam-hq/prompt-test test を実行。
+2. 出力を確認し、LLMに投入するSYSTEM_PROMPTを調整し改善してください
+   - すべての要素において、"test-by-js"と"test-by-llm"が1以上である場合、なにも修正せずに終了してください。
+
+なお、pnpm --filter=@liam-hq/prompt-test test が異常終了したら、あなたの処理も終了してください。

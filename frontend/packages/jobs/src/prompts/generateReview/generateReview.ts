@@ -25,8 +25,18 @@ Your JSON-formatted response must contain:
     - Project Rules Consistency
     - Security or Scalability
   - "severity": Assign a severity value:
-    - Use "CRITICAL" for major issues.
-    - Use "WARNING" for minor issues.
+    - Use "CRITICAL" ONLY for:
+      - Major issues that could cause immediate system failure
+      - Data loss risks that cannot be mitigated through migration planning
+      - Security vulnerabilities that expose sensitive data
+    - Use "WARNING" for:
+      - Minor issues that should be addressed but don't pose immediate risks
+      - ALL migration-related suggestions about:
+        - Backfilling data or handling existing records when adding new columns
+        - Implementing proper migration plans
+        - Ensuring tables are empty before migrations
+        - Adding default values to new columns
+      - Any changes that require careful planning but can be safely managed
     - Use "POSITIVE" to highlight improvements in the schema design.
     - Use "QUESTION" when you need to inquire about requirements, specifications, or design decisions that require clarification.
   - IMPORTANT FEEDBACK REQUIREMENTS:
@@ -35,6 +45,7 @@ Your JSON-formatted response must contain:
     3. For any category, include at least one feedback item with severity "POSITIVE" to highlight beneficial changes.
     4. Include feedback items with severity "QUESTION" whenever you identify areas that require clarification about requirements, design decisions, or business rules.
     5. QUESTION feedback should focus on ensuring the design meets all requirements and identifying potential gaps between implementation and specifications.
+    6. For any migration that adds columns or modifies data, ALWAYS include a "Migration Safety" feedback with "WARNING" severity that mentions checking if affected tables are empty and suggests proper migration planning.
   - "description": A clear and precise explanation of the feedback.
   - "suggestion": Provide actionable recommendations for resolving the feedback item.
     - If multiple valid solutions exist, include them all in a single string rather than as an array.
@@ -64,7 +75,7 @@ Your JSON-formatted response must contain:
       3. Third sentence: If no major issues exist, highlight a positive aspect of the change; otherwise, briefly emphasize the impact or importance of resolving the issue
 
 Evaluation Criteria Details:
-- **Migration Safety:** Evaluates whether mechanisms are in place to ensure that all changes are atomically rolled back and system integrity is maintained even if migration operations (such as DDL operations and data migration) are interrupted or fail midway. This is a general safety indicator.
+- **Migration Safety:** Evaluates whether mechanisms are in place to ensure that all changes are atomically rolled back and system integrity is maintained even if migration operations (such as DDL operations and data migration) are interrupted or fail midway. This is a general safety indicator. ALWAYS check and mention if tables need to be empty before migrations.
 - **Data Integrity:** Evaluates whether existing data is accurately migrated without loss, duplication, or inconsistencies after migration or schema changes. This is assessed through post-migration verification (checking record counts, data content, etc.) as a general data quality indicator.
 - **Performance Impact:** Evaluates the impact of schema changes, new constraints, and index additions on database query performance, write performance, and system resource usage. This is a general indicator to consider the risk of performance degradation due to data volume, concurrent connections, transaction conflicts, etc.
 - **Security or Scalability:** Evaluates the impact of migration or schema changes on system security and future scalability.
@@ -78,6 +89,8 @@ Before finalizing your response, perform these self-checks:
 1. Ensure that each category has at least one feedback item in "feedbacks".
 2. For every identified issue, ensure there is a corresponding feedback item with the correct severity.
 3. Ensure that there is at least one "POSITIVE" feedback item in "feedbacks" across all categories.
+4. Double-check that migration-related suggestions about backfilling data or handling existing records are marked as "WARNING" rather than "CRITICAL".
+5. Verify that for any migration adding columns or modifying data, you have included a "Migration Safety" feedback with "WARNING" severity that mentions checking if affected tables are empty.
 
 **Your output must be raw JSON only. Do not include any markdown code blocks or extraneous formatting.****
 `
@@ -100,7 +113,7 @@ File Changes:
 export const reviewJsonSchema: JSONSchema7 = toJsonSchema(reviewSchema)
 
 const model = new ChatOpenAI({
-  model: 'o3-mini-2025-01-31',
+  model: 'gpt-4o-mini',
 })
 
 const chatPrompt = ChatPromptTemplate.fromMessages([
