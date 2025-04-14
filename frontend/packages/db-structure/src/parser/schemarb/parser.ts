@@ -17,7 +17,7 @@ import { type Result, err, ok } from 'neverthrow'
 import type {
   Column,
   Columns,
-  DBStructure,
+  Schema,
   ForeignKeyConstraintReferenceOption,
   Index,
   Indexes,
@@ -352,13 +352,13 @@ function extractForeignKeyOptions(
   }
 }
 
-class DBStructureFinder extends Visitor {
+class SchemaFinder extends Visitor {
   private tables: Table[] = []
   private relationships: Relationship[] = []
   private errors: ProcessError[] = []
 
-  getDBStructure(): DBStructure {
-    const dbStructure: DBStructure = {
+  getSchema(): Schema {
+    const schema: Schema = {
       tables: this.tables.reduce((acc, table) => {
         acc[table.name] = table
         return acc
@@ -372,8 +372,8 @@ class DBStructureFinder extends Visitor {
       ),
       tableGroups: {},
     }
-    handleOneToOneRelationships(dbStructure.tables, dbStructure.relationships)
-    return dbStructure
+    handleOneToOneRelationships(schema.tables, schema.relationships)
+    return schema
   }
 
   getErrors(): ProcessError[] {
@@ -451,14 +451,14 @@ class DBStructureFinder extends Visitor {
 
 async function parseRubySchema(schemaString: string): Promise<ProcessResult> {
   const parse = await loadPrism()
-  const tableFinder = new DBStructureFinder()
+  const schemaFinder = new SchemaFinder()
 
   const parseResult = parse(schemaString)
-  parseResult.value.accept(tableFinder)
+  parseResult.value.accept(schemaFinder)
 
   return {
-    value: tableFinder.getDBStructure(),
-    errors: tableFinder.getErrors(),
+    value: schemaFinder.getSchema(),
+    errors: schemaFinder.getErrors(),
   }
 }
 

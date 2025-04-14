@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import type { DBStructure } from './dbStructure.js'
-import { type DBOverride, applyOverrides } from './overrideDbStructure.js'
+import type { Schema } from './dbStructure.js'
+import { type SchemaOverride, overrideSchema } from './overrideDbStructure.js'
 
-describe('overrideDbStructure', () => {
-  // Basic original DB structure for testing
-  const originalStructure: DBStructure = {
+describe('overrideSchema', () => {
+  // Basic original schema for testing
+  const originalSchema: Schema = {
     tables: {
       users: {
         name: 'users',
@@ -50,7 +50,7 @@ describe('overrideDbStructure', () => {
 
   describe('Overriding existing tables', () => {
     it('should override a table comment', () => {
-      const override: DBOverride = {
+      const override: SchemaOverride = {
         overrides: {
           tables: {
             users: {
@@ -60,18 +60,18 @@ describe('overrideDbStructure', () => {
         },
       }
 
-      const { dbStructure } = applyOverrides(originalStructure, override)
+      const { schema } = overrideSchema(originalSchema, override)
 
-      expect(dbStructure.tables['users']?.comment).toBe(
+      expect(schema.tables['users']?.comment).toBe(
         'Updated user accounts table',
       )
       // Original columns should be preserved
-      expect(dbStructure.tables['users']?.columns['id']).toBeDefined()
-      expect(dbStructure.tables['users']?.columns['username']).toBeDefined()
+      expect(schema.tables['users']?.columns['id']).toBeDefined()
+      expect(schema.tables['users']?.columns['username']).toBeDefined()
     })
 
     it('should throw an error when overriding a non-existent table', () => {
-      const override: DBOverride = {
+      const override: SchemaOverride = {
         overrides: {
           tables: {
             nonexistent: {
@@ -81,7 +81,7 @@ describe('overrideDbStructure', () => {
         },
       }
 
-      expect(() => applyOverrides(originalStructure, override)).toThrowError(
+      expect(() => overrideSchema(originalSchema, override)).toThrowError(
         'Cannot override non-existent table: nonexistent',
       )
     })
@@ -89,7 +89,7 @@ describe('overrideDbStructure', () => {
 
   describe('Overriding column comments', () => {
     it('should override column comments in an existing table', () => {
-      const override: DBOverride = {
+      const override: SchemaOverride = {
         overrides: {
           tables: {
             users: {
@@ -106,18 +106,18 @@ describe('overrideDbStructure', () => {
         },
       }
 
-      const { dbStructure } = applyOverrides(originalStructure, override)
+      const { schema } = overrideSchema(originalSchema, override)
 
-      expect(dbStructure.tables['users']?.columns['id']?.comment).toBe(
+      expect(schema.tables['users']?.columns['id']?.comment).toBe(
         'Updated primary key comment',
       )
-      expect(dbStructure.tables['users']?.columns['username']?.comment).toBe(
+      expect(schema.tables['users']?.columns['username']?.comment).toBe(
         'Updated username comment',
       )
     })
 
     it('should throw an error when overriding a non-existent column', () => {
-      const override: DBOverride = {
+      const override: SchemaOverride = {
         overrides: {
           tables: {
             users: {
@@ -131,7 +131,7 @@ describe('overrideDbStructure', () => {
         },
       }
 
-      expect(() => applyOverrides(originalStructure, override)).toThrowError(
+      expect(() => overrideSchema(originalSchema, override)).toThrowError(
         'Cannot override non-existent column nonexistent in table users',
       )
     })
@@ -139,7 +139,7 @@ describe('overrideDbStructure', () => {
 
   describe('Table groups', () => {
     it('should handle table groups', () => {
-      const override: DBOverride = {
+      const override: SchemaOverride = {
         overrides: {
           tableGroups: {
             auth: {
@@ -151,7 +151,7 @@ describe('overrideDbStructure', () => {
         },
       }
 
-      const { tableGroups } = applyOverrides(originalStructure, override)
+      const { tableGroups } = overrideSchema(originalSchema, override)
 
       expect(tableGroups['auth']).toBeDefined()
       expect(tableGroups['auth']?.name).toBe('Authentication')
@@ -164,9 +164,9 @@ describe('overrideDbStructure', () => {
 
   describe('Complex scenarios', () => {
     it('should handle multiple override operations at once', () => {
-      const structureWithPostsForTest: DBStructure = {
+      const schemaWithPostsForTest: Schema = {
         tables: {
-          ...originalStructure.tables,
+          ...originalSchema.tables,
           posts: {
             name: 'posts',
             comment: 'Blog posts',
@@ -210,7 +210,7 @@ describe('overrideDbStructure', () => {
         tableGroups: {},
       }
 
-      const override: DBOverride = {
+      const override: SchemaOverride = {
         overrides: {
           tables: {
             users: {
@@ -245,20 +245,20 @@ describe('overrideDbStructure', () => {
         },
       }
 
-      const { dbStructure, tableGroups } = applyOverrides(
-        structureWithPostsForTest,
+      const { schema, tableGroups } = overrideSchema(
+        schemaWithPostsForTest,
         override,
       )
 
-      expect(dbStructure.tables['users']?.comment).toBe(
+      expect(schema.tables['users']?.comment).toBe(
         'User accounts with enhanced permissions',
       )
-      expect(dbStructure.tables['posts']?.comment).toBe('User blog posts')
+      expect(schema.tables['posts']?.comment).toBe('User blog posts')
 
-      expect(dbStructure.tables['users']?.columns['username']?.comment).toBe(
+      expect(schema.tables['users']?.columns['username']?.comment).toBe(
         'User login name',
       )
-      expect(dbStructure.tables['posts']?.columns['title']?.comment).toBe(
+      expect(schema.tables['posts']?.columns['title']?.comment).toBe(
         'Post headline',
       )
 

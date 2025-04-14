@@ -1,6 +1,6 @@
-import type { DBStructure } from '../../../schema/index.js'
+import type { Schema } from '../../../schema/index.js'
 
-export const mergeDBStructures = (target: DBStructure, source: DBStructure) => {
+export const mergeSchemas = (target: Schema, source: Schema) => {
   for (const [tableName, table] of Object.entries(source.tables)) {
     target.tables[tableName] = {
       ...target.tables[tableName],

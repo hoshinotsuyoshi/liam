@@ -1,9 +1,9 @@
 import * as v from 'valibot'
 import {
-  type DBStructure,
+  type Schema,
   type TableGroup,
   columnNameSchema,
-  dbStructureSchema,
+  schemaSchema,
   tableGroupNameSchema,
   tableGroupSchema,
   tableNameSchema,
@@ -21,7 +21,7 @@ const tableOverrideSchema = v.object({
 export type TableOverride = v.InferOutput<typeof tableOverrideSchema>
 
 // Schema for the entire override structure
-export const dbOverrideSchema = v.object({
+export const schemaOverrideSchema = v.object({
   overrides: v.object({
     // For overriding properties of existing tables
     tables: v.optional(v.record(tableNameSchema, tableOverrideSchema)),
@@ -31,32 +31,32 @@ export const dbOverrideSchema = v.object({
   }),
 })
 
-export type DBOverride = v.InferOutput<typeof dbOverrideSchema>
+export type SchemaOverride = v.InferOutput<typeof schemaOverrideSchema>
 
 /**
- * Applies override definitions to the existing DB structure.
+ * Applies override definitions to the existing schema.
  * This function will:
  * 1. Apply overrides to existing tables (e.g., replacing comments)
  * 2. Apply overrides to existing columns (e.g., replacing comments)
- * 3. Process and merge table groups from both original structure and overrides
- * @param originalStructure The original DB structure
+ * 3. Process and merge table groups from both original schema and overrides
+ * @param originalSchema The original schema
  * @param override The override definitions
- * @returns The merged DB structure and table grouping information
+ * @returns The merged schema and table grouping information
  */
-export function applyOverrides(
-  originalStructure: DBStructure,
-  override: DBOverride,
-): { dbStructure: DBStructure; tableGroups: Record<string, TableGroup> } {
+export function overrideSchema(
+  originalSchema: Schema,
+  override: SchemaOverride,
+): { schema: Schema; tableGroups: Record<string, TableGroup> } {
   const result = v.parse(
-    dbStructureSchema,
-    JSON.parse(JSON.stringify(originalStructure)),
+    schemaSchema,
+    JSON.parse(JSON.stringify(originalSchema)),
   )
 
   const { overrides } = override
 
-  // Initialize table groups from the original DB structure if it exists
-  const tableGroups: Record<string, TableGroup> = originalStructure.tableGroups
-    ? { ...originalStructure.tableGroups }
+  // Initialize table groups from the original schema if it exists
+  const tableGroups: Record<string, TableGroup> = originalSchema.tableGroups
+    ? { ...originalSchema.tableGroups }
     : {}
 
   // Apply table overrides
@@ -108,8 +108,8 @@ export function applyOverrides(
     }
   }
 
-  // Set table groups to the result DB structure
+  // Set table groups to the result schema
   result.tableGroups = tableGroups
 
-  return { dbStructure: result, tableGroups }
+  return { schema: result, tableGroups }
 }

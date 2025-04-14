@@ -100,8 +100,8 @@ const constraintToRelationship = (
   })
 }
 
-// Transform function for AST to DBStructure
-export const convertToDBStructure = (stmts: RawStmt[]): ProcessResult => {
+// Transform function for AST to Schema
+export const convertToSchema = (stmts: RawStmt[]): ProcessResult => {
   const tables: Record<string, Table> = {}
   const relationships: Record<string, Relationship> = {}
   const tableGroups: Record<string, TableGroup> = {}

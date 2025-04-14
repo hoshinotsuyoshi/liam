@@ -1,6 +1,6 @@
 import type {
   Column,
-  DBStructure,
+  Schema,
   Index,
   Relationship,
   Table,
@@ -64,7 +64,7 @@ const tables = (override?: Tables): Tables => {
   )
 }
 
-export const aDBStructure = (override?: Partial<DBStructure>): DBStructure => ({
+export const aSchema = (override?: Partial<Schema>): Schema => ({
   tables: tables(override?.tables),
   relationships: {},
   tableGroups: {},

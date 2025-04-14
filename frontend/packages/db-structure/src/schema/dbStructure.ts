@@ -142,10 +142,10 @@ export const tableGroupsSchema = v.record(
 )
 export type TableGroups = v.InferOutput<typeof tableGroupsSchema>
 
-export const dbStructureSchema = v.object({
+export const schemaSchema = v.object({
   tables: tablesSchema,
   relationships: relationshipsSchema,
   tableGroups: tableGroupsSchema,
 })
 
-export type DBStructure = v.InferOutput<typeof dbStructureSchema>
+export type Schema = v.InferOutput<typeof schemaSchema>

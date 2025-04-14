@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import type { Table } from '../../schema/index.js'
-import { aColumn, aDBStructure, aTable } from '../../schema/index.js'
+import { aColumn, aSchema, aTable } from '../../schema/index.js'
 import { UnsupportedTokenError, processor } from './index.js'
 
 import { createParserTestCases } from '../__tests__/index.js'
 
 describe(processor, () => {
   const userTable = (override?: Partial<Table>) =>
-    aDBStructure({
+    aSchema({
       tables: {
         users: aTable({
           name: 'users',
@@ -171,7 +171,7 @@ describe(processor, () => {
         end
       `)
 
-      const expected = aDBStructure({
+      const expected = aSchema({
         tables: {
           users: aTable({
             name: 'users',

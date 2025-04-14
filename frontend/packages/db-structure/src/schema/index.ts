@@ -1,12 +1,12 @@
 export {
-  dbStructureSchema,
+  schemaSchema,
   tableGroupSchema,
   tableGroupsSchema,
 } from './dbStructure.js'
 export type {
   Column,
   Columns,
-  DBStructure,
+  Schema,
   Table,
   Tables,
   Relationship,
@@ -21,12 +21,12 @@ export type {
 export {
   aColumn,
   aTable,
-  aDBStructure,
+  aSchema,
   anIndex,
   aRelationship,
 } from './factories.js'
 export {
-  applyOverrides,
-  dbOverrideSchema,
+  overrideSchema,
+  schemaOverrideSchema,
 } from './overrideDbStructure.js'
-export type { DBOverride } from './overrideDbStructure.js'
+export type { SchemaOverride } from './overrideDbStructure.js'

@@ -1,8 +1,8 @@
-import type { DBStructure } from '../../../schema/index.js'
+import type { Schema } from '../../../schema/index.js'
 import { type ProcessError, UnexpectedTokenWarningError } from '../../errors.js'
 import type { Processor } from '../../types.js'
-import { convertToDBStructure } from './converter.js'
-import { mergeDBStructures } from './mergeDBStructures.js'
+import { convertToSchema } from './converter.js'
+import { mergeSchemas } from './mergeDBStructures.js'
 import { parse } from './parser.js'
 import { processSQLInChunks } from './processSQLInChunks.js'
 
@@ -10,7 +10,7 @@ import { processSQLInChunks } from './processSQLInChunks.js'
  * Processes SQL statements and constructs a database structure.
  */
 export const processor: Processor = async (sql: string) => {
-  const dbSchema: DBStructure = {
+  const schema: Schema = {
     tables: {},
     relationships: {},
     tableGroups: {},
@@ -64,7 +64,7 @@ export const processor: Processor = async (sql: string) => {
     }
 
     const { value: convertedSchema, errors: conversionErrors } =
-      convertToDBStructure(
+      convertToSchema(
         isLastStatementComplete
           ? parse_tree.stmts
           : parse_tree.stmts.slice(0, -1),
@@ -74,10 +74,10 @@ export const processor: Processor = async (sql: string) => {
       parseErrors.push(...conversionErrors)
     }
 
-    mergeDBStructures(dbSchema, convertedSchema)
+    mergeSchemas(schema, convertedSchema)
 
     return [retryOffset, readOffset, errors]
   })
 
-  return { value: dbSchema, errors: parseErrors.concat(errors) }
+  return { value: schema, errors: parseErrors.concat(errors) }
 }
