@@ -17,7 +17,7 @@ type ErrorObject = {
 }
 
 export type Props = {
-  dbStructure: Schema
+  schema: Schema
   tableGroups?: Record<string, TableGroup>
   errorObjects: ErrorObject[]
   defaultSidebarOpen: boolean
@@ -26,7 +26,7 @@ export type Props = {
 }
 
 export const ErdViewer: FC<Props> = ({
-  dbStructure,
+  schema,
   tableGroups: initialTableGroups = {},
   errorObjects,
   defaultSidebarOpen,
@@ -37,9 +37,9 @@ export const ErdViewer: FC<Props> = ({
   const { tableGroups, addTableGroup } = useTableGroups(initialTableGroups)
 
   useEffect(() => {
-    initSchemaStore(dbStructure)
+    initSchemaStore(schema)
     setShowCookieConsent(window === window.parent)
-  }, [dbStructure])
+  }, [schema])
 
   const versionData = {
     version: '0.1.0', // NOTE: no maintained version for ERD Web

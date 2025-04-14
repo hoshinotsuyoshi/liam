@@ -35,7 +35,7 @@ We will perform all DB schema parsing within a Node.js environment. Specifically
 
 3. **Unified Data Model**
 
-   - Map every schema format to a common `DBStructure` type so that subsequent ER diagram generation remains format-agnostic.
+   - Map every schema format to a common `Schema` type so that subsequent ER diagram generation remains format-agnostic.
 
 4. **Future Growth**
    - If new formats emerge, we will first look for a WASM or JavaScript solution. Only if absolutely necessary will we consider introducing new runtimes or custom parser generators.
@@ -47,7 +47,7 @@ We will perform all DB schema parsing within a Node.js environment. Specifically
   - **Simplicity**: Users only need to modify the URL (e.g., prepend `liambx.com/erd/p/`) to get a rendered ER diagram, avoiding additional installs.
   - **Consistent Tech Stack**: All parsing and server-side code is in Node.js, reducing learning and operational overhead.
   - **Testability**: We can write tests using familiar tooling (e.g., Vitest), and integrate easily with CI/CD pipelines.
-  - **Extensibility**: A unified internal model (`DBStructure`) makes it simpler to add support for new formats later.
+  - **Extensibility**: A unified internal model (`Schema`) makes it simpler to add support for new formats later.
 
 - **Negative Impacts**
 

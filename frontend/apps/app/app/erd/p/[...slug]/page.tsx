@@ -88,7 +88,7 @@ export default async function Page({
 
   const url = `https://${joinedPath}`
 
-  const blankDbStructure = { tables: {}, relationships: {}, tableGroups: {} }
+  const blankSchema = { tables: {}, relationships: {}, tableGroups: {} }
 
   const contentUrl = resolveContentUrl(url)
   const weCannotAccess = `Our signal's lost in the void! No access at this time..`
@@ -96,7 +96,7 @@ export default async function Page({
   if (!contentUrl) {
     return (
       <ERDViewer
-        dbStructure={blankDbStructure}
+        schema={blankSchema}
         defaultSidebarOpen={false}
         errorObjects={[
           {
@@ -137,7 +137,7 @@ export default async function Page({
   if (!res || networkErrorObjects.length > 0) {
     return (
       <ERDViewer
-        dbStructure={blankDbStructure}
+        schema={blankSchema}
         defaultSidebarOpen={false}
         errorObjects={networkErrorObjects}
       />
@@ -146,7 +146,7 @@ export default async function Page({
   if (!res.ok) {
     return (
       <ERDViewer
-        dbStructure={blankDbStructure}
+        schema={blankSchema}
         defaultSidebarOpen={false}
         errorObjects={[
           {
@@ -176,7 +176,7 @@ export default async function Page({
     // TODO: Update the error name to something more appropriate.
     return (
       <ERDViewer
-        dbStructure={blankDbStructure}
+        schema={blankSchema}
         defaultSidebarOpen={false}
         errorObjects={[
           {
@@ -190,7 +190,7 @@ export default async function Page({
     )
   }
 
-  const { value: dbStructure, errors } = await parse(input, format)
+  const { value: schema, errors } = await parse(input, format)
   for (const error of errors) {
     Sentry.captureException(error)
   }
@@ -219,7 +219,7 @@ export default async function Page({
 
   return (
     <ERDViewer
-      dbStructure={dbStructure}
+      schema={schema}
       defaultSidebarOpen={defaultSidebarOpen}
       defaultPanelSizes={defaultPanelSizes}
       errorObjects={errorObjects}

@@ -21,7 +21,7 @@ type ErrorObject = {
 }
 
 export type ERDViewerProps = {
-  dbStructure: Schema
+  schema: Schema
   tableGroups?: Record<string, TableGroup>
   errorObjects: ErrorObject[]
   defaultSidebarOpen: boolean
@@ -31,7 +31,7 @@ export type ERDViewerProps = {
 }
 
 export default function ERDViewer({
-  dbStructure,
+  schema,
   tableGroups: initialTableGroups = {},
   errorObjects,
   defaultSidebarOpen,
@@ -45,9 +45,9 @@ export default function ERDViewer({
   const [updateMessage, setUpdateMessage] = useState('')
 
   useEffect(() => {
-    initSchemaStore(dbStructure)
+    initSchemaStore(schema)
     setShowCookieConsent(window === window.parent)
-  }, [dbStructure])
+  }, [schema])
 
   // Handler for commit & push button
   const handleCommitAndPush = useCallback(async () => {

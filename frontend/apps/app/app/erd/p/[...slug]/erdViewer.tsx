@@ -18,14 +18,14 @@ type ErrorObject = {
 }
 
 type ERDViewerProps = {
-  dbStructure: Schema
+  schema: Schema
   errorObjects: ErrorObject[]
   defaultSidebarOpen: boolean
   defaultPanelSizes?: number[]
 }
 
 export default function ERDViewer({
-  dbStructure,
+  schema,
   errorObjects,
   defaultSidebarOpen,
   defaultPanelSizes = [20, 80],
@@ -33,9 +33,9 @@ export default function ERDViewer({
   const [isShowCookieConsent, setShowCookieConsent] = useState(false)
 
   useEffect(() => {
-    initSchemaStore(dbStructure)
+    initSchemaStore(schema)
     setShowCookieConsent(window === window.parent)
-  }, [dbStructure])
+  }, [schema])
 
   const versionData = {
     version: '0.1.0', // NOTE: no maintained version for ERD Web

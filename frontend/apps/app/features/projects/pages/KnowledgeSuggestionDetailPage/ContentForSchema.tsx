@@ -55,14 +55,14 @@ export const ContentForSchema: FC<Props> = async ({
     Number(repository.installationId),
   )
 
-  const { value: dbStructure, errors } =
+  const { value: schema, errors } =
     content !== null && format !== undefined
       ? await parse(content, format)
       : { value: undefined, errors: [] }
 
-  const { result } = dbStructure
-    ? await processOverrideContent(suggestion.content, dbStructure)
-    : { result: { dbStructure: undefined, tableGroups: {} } }
+  const { result } = schema
+    ? await processOverrideContent(suggestion.content, schema)
+    : { result: { schema: undefined, tableGroups: {} } }
 
   return (
     <ContentForSchemaSection
@@ -78,7 +78,7 @@ export const ContentForSchema: FC<Props> = async ({
           : null
       }
       isApproved={!!suggestion.approvedAt}
-      dbStructure={dbStructure}
+      schema={schema}
       content={content}
       errors={errors || []}
       tableGroups={result?.tableGroups || {}}
