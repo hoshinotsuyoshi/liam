@@ -1,5 +1,5 @@
 export * from './computeAutoLayout'
 export * from './columnHandleId'
-export * from './convertDBStructureToNodes'
+export * from './convertSchemaToNodes'
 export * from './highlightNodesAndEdges'
 export * from './isTableNode'

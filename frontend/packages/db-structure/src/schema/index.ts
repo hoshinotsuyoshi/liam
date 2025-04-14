@@ -2,7 +2,7 @@ export {
   schemaSchema,
   tableGroupSchema,
   tableGroupsSchema,
-} from './dbStructure.js'
+} from './schema.js'
 export type {
   Column,
   Columns,
@@ -17,7 +17,7 @@ export type {
   ForeignKeyConstraintReferenceOption,
   Cardinality,
   TableGroup,
-} from './dbStructure.js'
+} from './schema.js'
 export {
   aColumn,
   aTable,
@@ -28,5 +28,5 @@ export {
 export {
   overrideSchema,
   schemaOverrideSchema,
-} from './overrideDbStructure.js'
-export type { SchemaOverride } from './overrideDbStructure.js'
+} from './overrideSchema.js'
+export type { SchemaOverride } from './overrideSchema.js'

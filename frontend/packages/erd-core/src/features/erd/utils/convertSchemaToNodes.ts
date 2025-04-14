@@ -4,26 +4,26 @@ import {
 } from '@/features/erd/constants'
 import { columnHandleId } from '@/features/erd/utils'
 import type { ShowMode } from '@/schemas/showMode'
-import type { Cardinality, DBStructure } from '@liam-hq/db-structure'
+import type { Cardinality, Schema } from '@liam-hq/db-structure'
 import type { TableGroup } from '@liam-hq/db-structure'
 import type { Edge, Node } from '@xyflow/react'
 
 type Params = {
-  dbStructure: DBStructure
+  schema: Schema
   showMode: ShowMode
   tableGroups?: Record<string, TableGroup>
 }
 
-export const convertDBStructureToNodes = ({
-  dbStructure,
+export const convertSchemaToNodes = ({
+  schema,
   showMode,
   tableGroups = {},
 }: Params): {
   nodes: Node[]
   edges: Edge[]
 } => {
-  const tables = Object.values(dbStructure.tables)
-  const relationships = Object.values(dbStructure.relationships)
+  const tables = Object.values(schema.tables)
+  const relationships = Object.values(schema.relationships)
 
   const tablesWithRelationships = new Set<string>()
   const sourceColumns = new Map<string, string>()

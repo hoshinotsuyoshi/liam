@@ -7,7 +7,7 @@ import {
   tableGroupNameSchema,
   tableGroupSchema,
   tableNameSchema,
-} from './dbStructure.js'
+} from './schema.js'
 
 const columnOverrideSchema = v.object({
   comment: v.optional(v.nullable(v.string())),

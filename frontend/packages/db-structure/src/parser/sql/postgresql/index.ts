@@ -2,7 +2,7 @@ import type { Schema } from '../../../schema/index.js'
 import { type ProcessError, UnexpectedTokenWarningError } from '../../errors.js'
 import type { Processor } from '../../types.js'
 import { convertToSchema } from './converter.js'
-import { mergeSchemas } from './mergeDBStructures.js'
+import { mergeSchemas } from './mergeSchemas.js'
 import { parse } from './parser.js'
 import { processSQLInChunks } from './processSQLInChunks.js'
 

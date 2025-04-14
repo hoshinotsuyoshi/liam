@@ -1,16 +1,16 @@
 import type {
-  DBStructure,
+  Schema,
   Relationships,
   Table,
   Tables,
 } from '@liam-hq/db-structure'
 
-export const extractDBStructureForTable = (
+export const extractSchemaForTable = (
   table: Table,
-  dbStructure: DBStructure,
-): DBStructure => {
+  schema: Schema,
+): Schema => {
   const relatedRelationshipsArray = Object.values(
-    dbStructure.relationships,
+    schema.relationships,
   ).filter(
     (relationship) =>
       relationship.primaryTableName === table.name ||
@@ -38,7 +38,7 @@ export const extractDBStructureForTable = (
     relatedTableNames.add(relationship.foreignTableName)
   }
 
-  const relatedTablesArray = Object.values(dbStructure.tables).filter((tbl) =>
+  const relatedTablesArray = Object.values(schema.tables).filter((tbl) =>
     relatedTableNames.has(tbl.name),
   )
 

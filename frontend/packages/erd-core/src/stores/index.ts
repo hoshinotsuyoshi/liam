@@ -1,2 +1,2 @@
-export * from './dbStructure'
+export * from './schema'
 export * from './userEditing'

@@ -16,8 +16,8 @@ import styles from './ERDRenderer.module.css'
 import '@/styles/globals.css'
 import { toggleLogEvent } from '@/features/gtm/utils'
 import { useVersion } from '@/providers'
-import { useDBStructureStore, useUserEditingStore } from '@/stores'
-import { convertDBStructureToNodes } from '../../utils'
+import { useSchemaStore, useUserEditingStore } from '@/stores'
+import { convertSchemaToNodes } from '../../utils'
 import { ERDContent } from '../ERDContent'
 import { CardinalityMarkers } from './CardinalityMarkers'
 import { ErrorDisplay } from './ErrorDisplay'
@@ -54,9 +54,9 @@ export const ERDRenderer: FC<Props> = ({
   const [isResizing, setIsResizing] = useState(false)
 
   const { showMode } = useUserEditingStore()
-  const dbStructure = useDBStructureStore()
-  const { nodes, edges } = convertDBStructureToNodes({
-    dbStructure,
+  const schema = useSchemaStore()
+  const { nodes, edges } = convertSchemaToNodes({
+    schema,
     showMode,
     tableGroups,
   })

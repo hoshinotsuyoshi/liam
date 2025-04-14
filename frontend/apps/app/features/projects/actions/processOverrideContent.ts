@@ -1,14 +1,14 @@
 'use server'
 
-import type { DBStructure } from '@liam-hq/db-structure'
-import { applyOverrides, dbOverrideSchema } from '@liam-hq/db-structure'
+import type { Schema } from '@liam-hq/db-structure'
+import { overrideSchema, schemaOverrideSchema } from '@liam-hq/db-structure'
 import { safeParse } from 'valibot'
 
 export async function processOverrideContent(
   content: string,
-  dbStructure: DBStructure,
+  schema: Schema,
 ) {
-  const parsedOverrideContent = safeParse(dbOverrideSchema, JSON.parse(content))
+  const parsedOverrideContent = safeParse(schemaOverrideSchema, JSON.parse(content))
 
   if (!parsedOverrideContent.success) {
     return {
@@ -23,7 +23,7 @@ export async function processOverrideContent(
   }
 
   return {
-    result: applyOverrides(dbStructure, parsedOverrideContent.output),
+    result: overrideSchema(schema, parsedOverrideContent.output),
     error: null,
   }
 }

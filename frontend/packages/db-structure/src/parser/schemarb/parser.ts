@@ -17,11 +17,11 @@ import { type Result, err, ok } from 'neverthrow'
 import type {
   Column,
   Columns,
-  Schema,
   ForeignKeyConstraintReferenceOption,
   Index,
   Indexes,
   Relationship,
+  Schema,
   Table,
   Tables,
 } from '../../schema/index.js'

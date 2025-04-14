@@ -1,4 +1,4 @@
-import { type DBOverride, dbOverrideSchema } from '@liam-hq/db-structure'
+import { type SchemaOverride, schemaOverrideSchema } from '@liam-hq/db-structure'
 import { getFileContent } from '@liam-hq/github'
 import { v4 as uuidv4 } from 'uuid'
 import { safeParse } from 'valibot'
@@ -67,10 +67,10 @@ export const processGenerateSchemaMeta = async (
     )
 
     // Parse and validate the current schema metadata if it exists
-    let currentSchemaMeta: DBOverride | null = null
+    let currentSchemaMeta: SchemaOverride | null = null
     if (currentSchemaMetaContent) {
       const parsedJson = JSON.parse(currentSchemaMetaContent)
-      const result = safeParse(dbOverrideSchema, parsedJson)
+      const result = safeParse(schemaOverrideSchema, parsedJson)
 
       if (result.success) {
         currentSchemaMeta = result.output

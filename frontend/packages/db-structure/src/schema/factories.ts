@@ -1,11 +1,11 @@
 import type {
   Column,
-  Schema,
   Index,
   Relationship,
+  Schema,
   Table,
   Tables,
-} from './dbStructure.js'
+} from './schema.js'
 
 export const aColumn = (override?: Partial<Column>): Column => ({
   name: 'id',

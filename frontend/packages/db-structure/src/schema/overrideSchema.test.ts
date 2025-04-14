@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import type { Schema } from './dbStructure.js'
-import { type SchemaOverride, overrideSchema } from './overrideDbStructure.js'
+import type { Schema } from './schema.js'
+import { type SchemaOverride, overrideSchema } from './overrideSchema.js'
 
 describe('overrideSchema', () => {
   // Basic original schema for testing

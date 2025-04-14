@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Table } from '../../schema/index.js'
-import { aColumn, aDBStructure, aTable, anIndex } from '../../schema/index.js'
+import { aColumn, aSchema, aTable, anIndex } from '../../schema/index.js'
 import { processor } from './index.js'
 
 describe(processor, () => {

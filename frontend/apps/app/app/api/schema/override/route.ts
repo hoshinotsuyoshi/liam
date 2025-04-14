@@ -1,6 +1,6 @@
 import { OVERRIDE_SCHEMA_FILE_PATH } from '@/app/(app)/app/projects/[projectId]/ref/[branchOrCommit]/schema/[...schemaFilePath]/constants'
 import { createClient } from '@/libs/db/server'
-import { dbOverrideSchema, tableGroupsSchema } from '@liam-hq/db-structure'
+import { schemaOverrideSchema, tableGroupsSchema } from '@liam-hq/db-structure'
 import { createOrUpdateFileContent, getFileContent } from '@liam-hq/github'
 import { type NextRequest, NextResponse } from 'next/server'
 import * as v from 'valibot'
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
       ? JSON.parse(content)
       : { overrides: { tableGroups: {} } }
 
-    const validationResult = v.safeParse(dbOverrideSchema, rawSchemaOverride)
+    const validationResult = v.safeParse(schemaOverrideSchema, rawSchemaOverride)
 
     if (!validationResult.success) {
       return NextResponse.json(

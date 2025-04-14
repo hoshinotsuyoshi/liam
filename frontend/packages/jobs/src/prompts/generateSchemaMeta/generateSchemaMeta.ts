@@ -2,7 +2,7 @@ import type { Callbacks } from '@langchain/core/callbacks/manager'
 import { ChatPromptTemplate } from '@langchain/core/prompts'
 import { RunnableLambda } from '@langchain/core/runnables'
 import { ChatOpenAI } from '@langchain/openai'
-import { type DBOverride, dbOverrideSchema } from '@liam-hq/db-structure'
+import { type SchemaOverride, schemaOverrideSchema } from '@liam-hq/db-structure'
 import { toJsonSchema } from '@valibot/to-json-schema'
 import { type InferOutput, boolean, object, parse, string } from 'valibot'
 
@@ -15,7 +15,7 @@ const evaluationSchema = object({
 
 // Convert schemas to JSON format for LLM
 const evaluationJsonSchema = toJsonSchema(evaluationSchema)
-const dbOverrideJsonSchema = toJsonSchema(dbOverrideSchema)
+const schemaOverrideJsonSchema = toJsonSchema(schemaOverrideSchema)
 
 // Define type for evaluation result
 type EvaluationResult = InferOutput<typeof evaluationSchema>
@@ -23,7 +23,7 @@ type EvaluationResult = InferOutput<typeof evaluationSchema>
 type GenerateSchemaMetaResult =
   | {
       updateNeeded: true
-      override: DBOverride
+      override: SchemaOverride
       reasoning: string
     }
   | {
@@ -158,7 +158,7 @@ It is NOT for:
 Your response must strictly follow this JSON Schema and maintain the existing structure:
 <json>
 
-{dbOverrideJsonSchema}
+{schemaOverrideJsonSchema}
 
 </json>
 
@@ -184,7 +184,7 @@ REMEMBER: schema-meta.json is ONLY for documentation and organization purposes, 
 export const generateSchemaMeta = async (
   reviewComment: string,
   callbacks: Callbacks,
-  currentSchemaMeta: DBOverride | null,
+  currentSchemaMeta: SchemaOverride | null,
   runId: string,
   schemaFile: string,
 ): Promise<GenerateSchemaMetaResult> => {
@@ -203,7 +203,7 @@ export const generateSchemaMeta = async (
 
   // Create update chain
   const updateChain = UPDATE_TEMPLATE.pipe(
-    updateModel.withStructuredOutput(dbOverrideJsonSchema),
+    updateModel.withStructuredOutput(schemaOverrideJsonSchema),
   )
 
   // Define input types for our templates
@@ -215,12 +215,12 @@ export const generateSchemaMeta = async (
 
   type UpdateInput = EvaluationInput & {
     evaluationResults: string
-    dbOverrideJsonSchema: string
+    schemaOverrideJsonSchema: string
   }
 
   // Create a router function that returns different runnables based on evaluation
   const schemaMetaRouter = async (
-    inputs: EvaluationInput & { dbOverrideJsonSchema: string },
+    inputs: EvaluationInput & { schemaOverrideJsonSchema: string },
     config?: { callbacks?: Callbacks; runId?: string; tags?: string[] },
   ): Promise<GenerateSchemaMetaResult> => {
     // First, run the evaluation chain
@@ -240,7 +240,7 @@ export const generateSchemaMeta = async (
         reviewComment: inputs.reviewComment,
         currentSchemaMeta: inputs.currentSchemaMeta,
         schemaFile: inputs.schemaFile,
-        dbOverrideJsonSchema: inputs.dbOverrideJsonSchema,
+        schemaOverrideJsonSchema: inputs.schemaOverrideJsonSchema,
         evaluationResults: evaluationResult.suggestedChanges,
       }
 
@@ -251,7 +251,7 @@ export const generateSchemaMeta = async (
       })
 
       // Parse the result and add the reasoning from the evaluation
-      const parsedResult = parse(dbOverrideSchema, updateResult)
+      const parsedResult = parse(schemaOverrideSchema, updateResult)
 
       // Return the result with the new structure
       return {
@@ -282,7 +282,7 @@ export const generateSchemaMeta = async (
       currentSchemaMeta: currentSchemaMeta
         ? JSON.stringify(currentSchemaMeta, null, 2)
         : '{}',
-      dbOverrideJsonSchema: JSON.stringify(dbOverrideJsonSchema, null, 2),
+      schemaOverrideJsonSchema: JSON.stringify(schemaOverrideJsonSchema, null, 2),
       evaluationJsonSchema: JSON.stringify(evaluationJsonSchema, null, 2),
     }
 

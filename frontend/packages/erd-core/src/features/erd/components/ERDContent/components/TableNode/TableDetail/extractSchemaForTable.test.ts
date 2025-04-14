@@ -1,9 +1,9 @@
-import type { DBStructure } from '@liam-hq/db-structure'
+import type { Schema } from '@liam-hq/db-structure'
 import { aColumn, aRelationship, aTable } from '@liam-hq/db-structure'
 import { describe, expect, it } from 'vitest'
-import { extractDBStructureForTable } from './extractDBStructureForTable'
+import { extractSchemaForTable } from './extractSchemaForTable'
 
-describe(extractDBStructureForTable, () => {
+describe(extractSchemaForTable, () => {
   const users = aTable({
     name: 'users',
   })
@@ -35,7 +35,7 @@ describe(extractDBStructureForTable, () => {
     foreignColumnName: 'postId',
   })
 
-  const dbStructure: DBStructure = {
+  const schema: Schema = {
     tables: {
       users,
       posts,
@@ -49,7 +49,7 @@ describe(extractDBStructureForTable, () => {
   }
 
   it('should extract related tables and relationships for the given table (primary table)', () => {
-    const result = extractDBStructureForTable(users, dbStructure)
+    const result = extractSchemaForTable(users, schema)
     expect(result).toEqual({
       tables: { users, posts },
       relationships: { userPosts },
@@ -58,7 +58,7 @@ describe(extractDBStructureForTable, () => {
   })
 
   it('should extract related tables and relationships for the given table (foreign table)', () => {
-    const result = extractDBStructureForTable(comments, dbStructure)
+    const result = extractSchemaForTable(comments, schema)
     expect(result).toEqual({
       tables: { posts, comments },
       relationships: { postComments },
@@ -67,12 +67,12 @@ describe(extractDBStructureForTable, () => {
   })
 
   it('should return its own table and empty relationships if no relationships are found', () => {
-    const emptyDBStructure: DBStructure = {
+    const emptySchema: Schema = {
       tables: { users },
       relationships: {},
       tableGroups: {},
     }
-    const result = extractDBStructureForTable(users, emptyDBStructure)
+    const result = extractSchemaForTable(users, emptySchema)
     expect(result).toEqual({
       tables: { users },
       relationships: {},

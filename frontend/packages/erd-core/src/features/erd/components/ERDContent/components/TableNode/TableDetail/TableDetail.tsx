@@ -1,6 +1,6 @@
 import {
   computeAutoLayout,
-  convertDBStructureToNodes,
+  convertSchemaToNodes,
 } from '@/features/erd/utils'
 import { clickLogEvent, openRelatedTablesLogEvent } from '@/features/gtm/utils'
 import { useCustomReactflow } from '@/features/reactflow/hooks'
@@ -8,7 +8,7 @@ import { useVersion } from '@/providers'
 import {
   replaceHiddenNodeIds,
   updateActiveTableName,
-  useDBStructureStore,
+  useSchemaStore,
 } from '@/stores'
 import type { Table } from '@liam-hq/db-structure'
 import {
@@ -25,17 +25,17 @@ import { Comment } from './Comment'
 import { Indexes } from './Indexes'
 import { RelatedTables } from './RelatedTables'
 import styles from './TableDetail.module.css'
-import { extractDBStructureForTable } from './extractDBStructureForTable'
+import { extractSchemaForTable } from './extractSchemaForTable'
 
 type Props = {
   table: Table
 }
 
 export const TableDetail: FC<Props> = ({ table }) => {
-  const dbStructure = useDBStructureStore()
-  const extractedDBStructure = extractDBStructureForTable(table, dbStructure)
-  const { nodes, edges } = convertDBStructureToNodes({
-    dbStructure: extractedDBStructure,
+  const schema = useSchemaStore()
+  const extractedSchema = extractSchemaForTable(table, schema)
+  const { nodes, edges } = convertSchemaToNodes({
+    schema: extractedSchema,
     showMode: 'TABLE_NAME',
   })
 
