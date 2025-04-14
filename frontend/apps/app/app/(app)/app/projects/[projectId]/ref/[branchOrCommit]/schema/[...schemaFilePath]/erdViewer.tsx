@@ -1,14 +1,14 @@
 'use client'
 
 import { CookieConsent } from '@/components/CookieConsent'
-import type { DBStructure } from '@liam-hq/db-structure'
+import type { Schema } from '@liam-hq/db-structure'
 import type { TableGroup } from '@liam-hq/db-structure'
 import {
   ERDRenderer,
   VersionProvider,
-  initDBStructureStore,
+  initSchemaStore,
   useTableGroups,
-  versionSchema,
+  versionSchema
 } from '@liam-hq/erd-core'
 import { Button } from '@liam-hq/ui'
 import { useCallback, useEffect, useState } from 'react'
@@ -21,7 +21,7 @@ type ErrorObject = {
 }
 
 export type ERDViewerProps = {
-  dbStructure: DBStructure
+  dbStructure: Schema
   tableGroups?: Record<string, TableGroup>
   errorObjects: ErrorObject[]
   defaultSidebarOpen: boolean
@@ -45,7 +45,7 @@ export default function ERDViewer({
   const [updateMessage, setUpdateMessage] = useState('')
 
   useEffect(() => {
-    initDBStructureStore(dbStructure)
+    initSchemaStore(dbStructure)
     setShowCookieConsent(window === window.parent)
   }, [dbStructure])
 

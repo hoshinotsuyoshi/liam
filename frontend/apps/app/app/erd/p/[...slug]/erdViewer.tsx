@@ -1,12 +1,12 @@
 'use client'
 
 import { CookieConsent } from '@/components/CookieConsent'
-import type { DBStructure, ProcessError } from '@liam-hq/db-structure'
+import type { Schema, ProcessError } from '@liam-hq/db-structure'
 import {
   ERDRenderer,
   VersionProvider,
-  initDBStructureStore,
-  versionSchema,
+  initSchemaStore,
+  versionSchema
 } from '@liam-hq/erd-core'
 import { useEffect, useState } from 'react'
 import * as v from 'valibot'
@@ -18,7 +18,7 @@ type ErrorObject = {
 }
 
 type ERDViewerProps = {
-  dbStructure: DBStructure
+  dbStructure: Schema
   errorObjects: ErrorObject[]
   defaultSidebarOpen: boolean
   defaultPanelSizes?: number[]

@@ -1,9 +1,9 @@
-import { dbStructureSchema } from '@liam-hq/db-structure'
+import { schemaSchema } from '@liam-hq/db-structure'
 import {
   ERDRenderer,
   VersionProvider,
-  initDBStructureStore,
-  versionSchema,
+  initSchemaStore,
+  versionSchema
 } from '@liam-hq/erd-core'
 import * as v from 'valibot'
 
@@ -14,9 +14,9 @@ async function loadSchemaContent() {
       throw new Error(`Failed to fetch schema: ${response.statusText}`)
     }
     const data = await response.json()
-    const result = v.safeParse(dbStructureSchema, data)
+    const result = v.safeParse(schemaSchema, data)
     result.success
-      ? initDBStructureStore(result.output)
+      ? initSchemaStore(result.output)
       : console.info(result.issues)
   } catch (error) {
     console.error('Error loading schema content:', error)
