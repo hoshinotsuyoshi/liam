@@ -5,7 +5,7 @@ import { processor } from './index.js'
 
 describe(processor, () => {
   const userTable = (override?: Partial<Table>) =>
-    aDBStructure({
+    aSchema({
       tables: {
         users: aTable({
           name: 'users',
@@ -482,7 +482,7 @@ describe(processor, () => {
         }),
       )
 
-      const expected = aDBStructure({
+      const expected = aSchema({
         tables: {
           users: aTable({
             name: 'users',
