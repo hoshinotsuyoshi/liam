@@ -33,7 +33,7 @@ export default function ERDViewer({
   const [isShowCookieConsent, setShowCookieConsent] = useState(false)
 
   useEffect(() => {
-    initDBStructureStore(dbStructure)
+    initSchemaStore(dbStructure)
     setShowCookieConsent(window === window.parent)
   }, [dbStructure])
 

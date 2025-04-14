@@ -5,8 +5,8 @@ import { ERDRenderer } from '@/features'
 import { useTableGroups } from '@/hooks'
 import { VersionProvider } from '@/providers'
 import { versionSchema } from '@/schemas'
-import { initDBStructureStore } from '@/stores'
-import type { DBStructure, TableGroup } from '@liam-hq/db-structure'
+import { initSchemaStore } from '@/stores'
+import type { Schema, TableGroup } from '@liam-hq/db-structure'
 import { type FC, useEffect, useState } from 'react'
 import { parse } from 'valibot'
 
@@ -17,7 +17,7 @@ type ErrorObject = {
 }
 
 export type Props = {
-  dbStructure: DBStructure
+  dbStructure: Schema
   tableGroups?: Record<string, TableGroup>
   errorObjects: ErrorObject[]
   defaultSidebarOpen: boolean
@@ -37,7 +37,7 @@ export const ErdViewer: FC<Props> = ({
   const { tableGroups, addTableGroup } = useTableGroups(initialTableGroups)
 
   useEffect(() => {
-    initDBStructureStore(dbStructure)
+    initSchemaStore(dbStructure)
     setShowCookieConsent(window === window.parent)
   }, [dbStructure])
 

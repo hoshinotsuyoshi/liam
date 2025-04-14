@@ -3,7 +3,7 @@
 import { processOverrideContent } from '@/features/projects/actions/processOverrideContent'
 import { updateKnowledgeSuggestionContent } from '@/features/projects/actions/updateKnowledgeSuggestionContent'
 import { EditableContent } from '@/features/projects/components/EditableContent'
-import type { DBStructure, TableGroup } from '@liam-hq/db-structure'
+import type { Schema, TableGroup } from '@liam-hq/db-structure'
 import type { SupportedFormat } from '@liam-hq/db-structure/parser'
 import { type FC, useState } from 'react'
 import { ErdViewer } from './ErdViewer'
@@ -24,7 +24,7 @@ type Props = {
   suggestionId: number
   originalContent: string | null
   isApproved: boolean
-  dbStructure: DBStructure | undefined
+  dbStructure: Schema | undefined
   content: string | null
   errors: ErrorObject[]
   tableGroups: Record<string, TableGroup>
