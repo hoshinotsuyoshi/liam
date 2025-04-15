@@ -47,13 +47,13 @@ The schema-override.yml file is ONLY used for:
 1. Adding informative comments to existing database tables and columns
 2. Documenting relationships between existing tables
 3. Grouping related tables together for better organization
-4. Adding descriptive column metadata
+4. Adding descriptive column override
 
 schema-override.yml is NOT used for:
 1. Defining database migrations or changes to actual schema structure
 2. Creating migration safety mechanisms, rollbacks, or changesets
 3. Addressing performance concerns or data integrity checks
-4. Defining new tables or columns (only adds metadata to existing ones)
+4. Defining new tables or columns (only adds override to existing ones)
 
 schema-override.yml is a documentation-only enhancement layer on top of the actual database schema.
 
@@ -64,7 +64,7 @@ schema-override.yml is a documentation-only enhancement layer on top of the actu
 - If important relationships between tables are not documented, add them
 
 ## When NOT to Update Schema Override
-- If comments mention migration procedures, rollbacks, or data integrity (irrelevant to metadata)
+- If comments mention migration procedures, rollbacks, or data integrity (irrelevant to schema override)
 - If there are concerns about query performance or database operations
 - If there's no clear suggestion to improve documentation or organization
 - If the concern is about schema structure rather than its documentation
@@ -102,12 +102,12 @@ Provide a JSON response with the following schema:
 The response must include:
 - updateNeeded: Set to true ONLY if specific table documentation, relationships, or groupings need updating
 - reasoning: A detailed explanation of your decision, focused on documentation needs
-- suggestedChanges: If updates are needed, provide specific metadata changes (NOT schema structure changes)
+- suggestedChanges: If updates are needed, provide specific override changes (NOT schema structure changes)
 
 ## Guidelines for Evaluation
 1. IGNORE any comments about migrations, rollbacks, performance, or data integrity - these are NOT relevant to schema-override.yml
 2. Focus ONLY on improving table/column documentation and organization
-3. Default to "updateNeeded: false" unless there is clear evidence that metadata documentation needs improvement
+3. Default to "updateNeeded: false" unless there is clear evidence that schema override documentation needs improvement
 4. If a table has been removed from the schema (like GitHubDocFilePath), simply suggest removing it from schema-override.yml
 5. Be conservative - schema-override.yml is for documentation purposes only
 `)

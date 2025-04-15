@@ -4,7 +4,7 @@
 
 The current focus is on enhancing the Reviewer User experience with AI-driven analysis and suggestions integrated into the migration review process. Key areas of active development include:
 
-1. **Schema Override Generation Pipeline**: Improving the pipeline that creates and stores metadata suggestions based on PR reviews.
+1. **Schema Override Generation Pipeline**: Improving the pipeline that creates and stores schema override suggestions based on PR reviews.
 2. **Schema Change Detection**: Enhancing the detection system to better identify and analyze database migrations.
 3. **Review Prompt Template**: Refining the template to provide more detailed and contextual analysis.
 
@@ -69,10 +69,10 @@ The current focus is on enhancing the Reviewer User experience with AI-driven an
    - Enhanced prompt templates to include PR description and comments sections
    - Updated all related files for consistent terminology
 
-6. **Schema Override Generation**: Implemented a new pipeline that creates and stores metadata suggestions based on PR reviews, including:
+6. **Schema Override Generation**: Implemented a new pipeline that creates and stores schema override suggestions based on PR reviews, including:
    - New task (`generateSchemaOverrideSuggestionTask`) triggered after a review is saved
    - Processing function (`processGenerateSchemaOverride`) for generating schema override suggestions
-   - Integration with `createKnowledgeSuggestionTask` to store generated metadata
+   - Integration with `createKnowledgeSuggestionTask` to store generated schema override
    - Enhanced prompt with current schema override context for more informed suggestions
    - Added schema files content to the AI prompt for better context and more accurate suggestions
    - Created reusable utility function for fetching schema files content

@@ -3,7 +3,7 @@
 ## Technologies Used
 - **AI Components**: Utilized for analyzing migration impacts and providing intelligent suggestions.
 - **LangChain**: Framework for developing applications powered by language models, used for AI review generation and schema override suggestions. The project uses LangChain's ChatOpenAI integration for all prompt generators.
-- **OpenAI**: Provider of AI models used for generating schema reviews and metadata suggestions. The project specifically uses the 'o3-mini-2025-01-31' model for all prompt generators.
+- **OpenAI**: Provider of AI models used for generating schema reviews and schema override suggestions. The project specifically uses the 'o3-mini-2025-01-31' model for all prompt generators.
 - **Trigger.dev**: Task orchestration platform used for implementing the review pipeline and knowledge suggestion tasks.
 - **GitHub App**: Integrated to automate comments and review approvals on PRs, with enhanced API usage for fetching PR descriptions and comments.
 - **Supabase JS**: JavaScript client for Supabase, used for database access with support for optimized queries using nested joins.
