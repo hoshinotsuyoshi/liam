@@ -1,13 +1,16 @@
 import { v4 as uuidv4 } from 'uuid'
 import { createClient } from '../libs/supabase'
-import { generateSchemaMeta } from '../prompts/generateSchemaMeta/generateSchemaMeta'
-import type { GenerateSchemaMetaPayload, SchemaMetaResult } from '../types'
+import { generateSchemaOverride } from '../prompts/generateSchemaOverride/generateSchemaOverride'
+import type {
+  GenerateSchemaOverridePayload,
+  SchemaOverrideResult,
+} from '../types'
 import { fetchSchemaInfoWithOverrides } from '../utils/schemaUtils'
 import { langfuseLangchainHandler } from './langfuseLangchainHandler'
 
-export const processGenerateSchemaMeta = async (
-  payload: GenerateSchemaMetaPayload,
-): Promise<SchemaMetaResult> => {
+export const processGenerateSchemaOverride = async (
+  payload: GenerateSchemaOverridePayload,
+): Promise<SchemaOverrideResult> => {
   try {
     const supabase = createClient()
 
@@ -53,7 +56,7 @@ export const processGenerateSchemaMeta = async (
 
     // Fetch schema information with overrides
     const repositoryFullName = `${repository.owner}/${repository.name}`
-    const { currentSchemaMeta, overriddenSchema } =
+    const { currentSchemaOverride, overriddenSchema } =
       await fetchSchemaInfoWithOverrides(
         Number(project.id),
         overallReview.branchName,
@@ -61,16 +64,16 @@ export const processGenerateSchemaMeta = async (
         Number(repository.installationId),
       )
 
-    const schemaMetaResult = await generateSchemaMeta(
+    const schemaOverrideResult = await generateSchemaOverride(
       overallReview.reviewComment || '',
       callbacks,
-      currentSchemaMeta,
+      currentSchemaOverride,
       predefinedRunId,
       overriddenSchema,
     )
 
     // If no update is needed, return early with createNeeded: false
-    if (!schemaMetaResult.updateNeeded) {
+    if (!schemaOverrideResult.updateNeeded) {
       return {
         createNeeded: false,
       }
@@ -79,13 +82,13 @@ export const processGenerateSchemaMeta = async (
     // Return the schema meta along with information needed for createKnowledgeSuggestionTask
     return {
       createNeeded: true,
-      override: schemaMetaResult.override,
+      override: schemaOverrideResult.override,
       projectId: project.id,
       pullRequestNumber: Number(pullRequest.pullNumber), // Convert bigint to number
       branchName: overallReview.branchName, // Get branchName from overallReview
       title: `Schema meta update from PR #${Number(pullRequest.pullNumber)}`,
       traceId: predefinedRunId,
-      reasoning: schemaMetaResult.reasoning,
+      reasoning: schemaOverrideResult.reasoning,
       overallReviewId: payload.overallReviewId,
     }
   } catch (error) {

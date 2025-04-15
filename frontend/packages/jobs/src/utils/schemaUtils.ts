@@ -14,7 +14,7 @@ import { fetchSchemaFileContent } from './githubFileUtils'
 export type SchemaInfo = {
   schema: Schema // Original database structure
   overriddenSchema: Schema // Database structure with overrides applied
-  currentSchemaMeta: SchemaOverride | null // Current schema metadata
+  currentSchemaOverride: SchemaOverride | null // Current schema metadata
 }
 
 /**
@@ -33,7 +33,7 @@ export const fetchSchemaInfoWithOverrides = async (
   installationId: number,
 ): Promise<SchemaInfo> => {
   // Fetch the current schema metadata file from GitHub
-  const { content: currentSchemaMetaContent } = await getFileContent(
+  const { content: currentSchemaOverrideContent } = await getFileContent(
     repositoryFullName,
     SCHEMA_OVERRIDE_FILE_PATH,
     branchName,
@@ -41,13 +41,13 @@ export const fetchSchemaInfoWithOverrides = async (
   )
 
   // Parse and validate the current schema metadata if it exists
-  let currentSchemaMeta: SchemaOverride | null = null
-  if (currentSchemaMetaContent) {
-    const parsedJson = JSON.parse(currentSchemaMetaContent)
+  let currentSchemaOverride: SchemaOverride | null = null
+  if (currentSchemaOverrideContent) {
+    const parsedJson = JSON.parse(currentSchemaOverrideContent)
     const result = safeParse(schemaOverrideSchema, parsedJson)
 
     if (result.success) {
-      currentSchemaMeta = result.output
+      currentSchemaOverride = result.output
     }
   }
 
@@ -67,14 +67,14 @@ export const fetchSchemaInfoWithOverrides = async (
     console.warn('Errors parsing schema file:', errors)
   }
 
-  // Apply overrides to schema if currentSchemaMeta exists
-  const overriddenSchema = currentSchemaMeta
-    ? overrideSchema(schema, currentSchemaMeta).schema
+  // Apply overrides to schema if currentSchemaOverride exists
+  const overriddenSchema = currentSchemaOverride
+    ? overrideSchema(schema, currentSchemaOverride).schema
     : schema
 
   return {
     schema,
     overriddenSchema,
-    currentSchemaMeta,
+    currentSchemaOverride,
   }
 }

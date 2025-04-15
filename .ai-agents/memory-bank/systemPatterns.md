@@ -33,7 +33,7 @@ The project uses a monorepo structure managed with pnpm workspaces, allowing for
 
 ## Component Relationships
 - **GitHub Webhook Handler**: Receives webhook events from GitHub, extracts schema changes, and triggers the review process.
-- **Task Pipeline**: A series of tasks (savePullRequestTask → generateReviewTask → saveReviewTask → postCommentTask → generateDocsSuggestionTask/generateSchemaMetaSuggestionTask → createKnowledgeSuggestionTask) that process the schema changes, generate reviews, and create knowledge suggestions.
+- **Task Pipeline**: A series of tasks (savePullRequestTask → generateReviewTask → saveReviewTask → postCommentTask → generateDocsSuggestionTask/generateSchemaOverrideSuggestionTask → createKnowledgeSuggestionTask) that process the schema changes, generate reviews, and create knowledge suggestions.
 - **Review Agent**: Works closely with the GitHub App to provide real-time analysis and feedback on migration changes.
 - **Migration Review Page**: Serves as the central interface for users to review detailed migration changes, AI suggestions, and improvement points.
 - **Interactive Knowledge Base**: Links review comments with ER diagrams to enhance contextual understanding and formalize best practices.

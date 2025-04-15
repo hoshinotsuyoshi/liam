@@ -24,7 +24,7 @@ const schemaOverrideJsonSchema = toJsonSchema(schemaOverrideSchema)
 // Define type for evaluation result
 type EvaluationResult = InferOutput<typeof evaluationSchema>
 
-type GenerateSchemaMetaResult =
+type GenerateSchemaOverrideResult =
   | {
       updateNeeded: true
       override: SchemaOverride
@@ -79,7 +79,7 @@ schema-override.yml is a documentation-only enhancement layer on top of the actu
 ## Current Schema Metadata
 <json>
 
-{currentSchemaMeta}
+{currentSchemaOverride}
 
 </json>
 
@@ -154,7 +154,7 @@ It is NOT for:
 ## Current Schema Metadata
 <json>
 
-{currentSchemaMeta}
+{currentSchemaOverride}
 
 </json>
 
@@ -185,13 +185,13 @@ Your response must strictly follow this JSON Schema and maintain the existing st
 REMEMBER: schema-override.yml is ONLY for documentation and organization purposes, NOT for actual database structure changes.
 `)
 
-export const generateSchemaMeta = async (
+export const generateSchemaOverride = async (
   reviewComment: string,
   callbacks: Callbacks,
-  currentSchemaMeta: SchemaOverride | null,
+  currentSchemaOverride: SchemaOverride | null,
   runId: string,
   schema: Schema,
-): Promise<GenerateSchemaMetaResult> => {
+): Promise<GenerateSchemaOverrideResult> => {
   const evaluationModel = new ChatOpenAI({
     model: 'o3-mini-2025-01-31',
   })
@@ -213,7 +213,7 @@ export const generateSchemaMeta = async (
   // Define input types for our templates
   type EvaluationInput = {
     reviewComment: string
-    currentSchemaMeta: string
+    currentSchemaOverride: string
     schema: string
   }
 
@@ -223,15 +223,15 @@ export const generateSchemaMeta = async (
   }
 
   // Create a router function that returns different runnables based on evaluation
-  const schemaMetaRouter = async (
+  const schemaOverrideRouter = async (
     inputs: EvaluationInput & { schemaOverrideJsonSchema: string },
     config?: { callbacks?: Callbacks; runId?: string; tags?: string[] },
-  ): Promise<GenerateSchemaMetaResult> => {
+  ): Promise<GenerateSchemaOverrideResult> => {
     // First, run the evaluation chain
     const evaluationResult: EvaluationResult = await evaluationChain.invoke(
       {
         reviewComment: inputs.reviewComment,
-        currentSchemaMeta: inputs.currentSchemaMeta,
+        currentSchemaOverride: inputs.currentSchemaOverride,
         schema: inputs.schema,
         evaluationJsonSchema: JSON.stringify(evaluationJsonSchema, null, 2),
       },
@@ -242,7 +242,7 @@ export const generateSchemaMeta = async (
       // Update is needed, generate new schema metadata
       const updateInput: UpdateInput = {
         reviewComment: inputs.reviewComment,
-        currentSchemaMeta: inputs.currentSchemaMeta,
+        currentSchemaOverride: inputs.currentSchemaOverride,
         schema: inputs.schema,
         schemaOverrideJsonSchema: inputs.schemaOverrideJsonSchema,
         evaluationResults: evaluationResult.suggestedChanges,
@@ -251,7 +251,7 @@ export const generateSchemaMeta = async (
       const updateResult = await updateChain.invoke(updateInput, {
         callbacks,
         runId,
-        tags: ['generateSchemaMeta'],
+        tags: ['generateSchemaOverride'],
       })
 
       // Parse the result and add the reasoning from the evaluation
@@ -275,7 +275,7 @@ export const generateSchemaMeta = async (
 
   // Create the router chain using RunnableLambda
   const routerChain = new RunnableLambda({
-    func: schemaMetaRouter,
+    func: schemaOverrideRouter,
   })
 
   try {
@@ -283,8 +283,8 @@ export const generateSchemaMeta = async (
     const commonInputs = {
       reviewComment,
       schema: JSON.stringify(schema, null, 2),
-      currentSchemaMeta: currentSchemaMeta
-        ? JSON.stringify(currentSchemaMeta, null, 2)
+      currentSchemaOverride: currentSchemaOverride
+        ? JSON.stringify(currentSchemaOverride, null, 2)
         : '{}',
       schemaOverrideJsonSchema: JSON.stringify(
         schemaOverrideJsonSchema,
@@ -298,7 +298,7 @@ export const generateSchemaMeta = async (
     return await routerChain.invoke(commonInputs, {
       callbacks,
       runId,
-      tags: ['generateSchemaMeta'],
+      tags: ['generateSchemaOverride'],
     })
   } catch (error) {
     console.error('Error generating schema meta:', error)

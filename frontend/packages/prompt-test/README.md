@@ -17,7 +17,7 @@ Testing for `@liam-hq/jobs` prompts.
 - Supported `@liam-hq/jobs` prompts
   - [x] generateReview
   - [ ] generateDocsSuggestion
-  - [ ] generateSchemaMeta
+  - [ ] generateSchemaOverride
 
 ## Usage
 

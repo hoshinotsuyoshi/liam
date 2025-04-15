@@ -11,9 +11,9 @@ The current focus is on enhancing the Reviewer User experience with AI-driven an
 ## Recent Changes
 
 1. **Switched AI Model from Anthropic to OpenAI**: Changed the AI model used in prompt generators from ChatAnthropic to ChatOpenAI:
-   - Updated all three prompt generator files (generateDocsSuggestion, generateReview, generateSchemaMeta) to use ChatOpenAI
+   - Updated all three prompt generator files (generateDocsSuggestion, generateReview, generateSchemaOverride) to use ChatOpenAI
    - Changed the model from 'claude-3-7-sonnet-latest' to 'o3-mini-2025-01-31'
-   - Created index.ts files for the generateSchemaMeta and generateDocsSuggestion directories
+   - Created index.ts files for the generateSchemaOverride and generateDocsSuggestion directories
    - Updated the main prompts/index.ts file to export all three prompt generators
    - Updated package.json to replace @langchain/anthropic with @langchain/openai v0.5.5
    - This change standardizes the AI model usage across the application and potentially improves performance and cost-efficiency
@@ -70,8 +70,8 @@ The current focus is on enhancing the Reviewer User experience with AI-driven an
    - Updated all related files for consistent terminology
 
 6. **Schema Metadata Generation**: Implemented a new pipeline that creates and stores metadata suggestions based on PR reviews, including:
-   - New task (`generateSchemaMetaSuggestionTask`) triggered after a review is saved
-   - Processing function (`processGenerateSchemaMeta`) for generating schema metadata suggestions
+   - New task (`generateSchemaOverrideSuggestionTask`) triggered after a review is saved
+   - Processing function (`processGenerateSchemaOverride`) for generating schema metadata suggestions
    - Integration with `createKnowledgeSuggestionTask` to store generated metadata
    - Enhanced prompt with current schema metadata context for more informed suggestions
    - Added schema files content to the AI prompt for better context and more accurate suggestions

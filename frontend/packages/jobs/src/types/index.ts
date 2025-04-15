@@ -50,11 +50,11 @@ export type PostCommentPayload = {
   traceId: string
 }
 
-export type GenerateSchemaMetaPayload = {
+export type GenerateSchemaOverridePayload = {
   overallReviewId: number
 }
 
-export type SchemaMetaResult =
+export type SchemaOverrideResult =
   | {
       createNeeded: true
       override: SchemaOverride

@@ -8,11 +8,11 @@ import {
   processGenerateDocsSuggestion,
 } from '../functions/processGenerateDocsSuggestion'
 import { processGenerateReview } from '../functions/processGenerateReview'
-import { processGenerateSchemaMeta } from '../functions/processGenerateSchemaMeta'
+import { processGenerateSchemaOverride } from '../functions/processGenerateSchemaOverride'
 import { processSaveReview } from '../functions/processSaveReview'
 import type {
   GenerateReviewPayload,
-  GenerateSchemaMetaPayload,
+  GenerateSchemaOverridePayload,
   PostCommentPayload,
   ReviewResponse,
 } from '../types'
@@ -68,7 +68,7 @@ export const saveReviewTask = task({
       })
 
       // Trigger schema meta suggestion generation after review is saved
-      await generateSchemaMetaSuggestionTask.trigger({
+      await generateSchemaOverrideSuggestionTask.trigger({
         overallReviewId,
       })
 
@@ -151,11 +151,11 @@ export const generateDocsSuggestionTask = task({
   },
 })
 
-export const generateSchemaMetaSuggestionTask = task({
+export const generateSchemaOverrideSuggestionTask = task({
   id: 'generate-schema-meta-suggestion',
-  run: async (payload: GenerateSchemaMetaPayload) => {
+  run: async (payload: GenerateSchemaOverridePayload) => {
     logger.log('Executing schema meta suggestion task:', { payload })
-    const result = await processGenerateSchemaMeta(payload)
+    const result = await processGenerateSchemaOverride(payload)
     logger.info('Generated schema meta suggestion:', { result })
 
     if (result.createNeeded) {
