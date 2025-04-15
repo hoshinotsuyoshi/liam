@@ -40,9 +40,9 @@ const EVALUATION_TEMPLATE = ChatPromptTemplate.fromTemplate(`
 You are Liam, an expert in database schema design and optimization.
 
 ## Your Task
-Analyze the review comments and current schema metadata to determine if specific updates to schema metadata are necessary.
+Analyze the review comments and current schema override to determine if specific updates to schema override are necessary.
 
-## Understanding Schema Metadata (IMPORTANT)
+## Understanding Schema Override (IMPORTANT)
 The schema-override.yml file is ONLY used for:
 1. Adding informative comments to existing database tables and columns
 2. Documenting relationships between existing tables
@@ -57,13 +57,13 @@ schema-override.yml is NOT used for:
 
 schema-override.yml is a documentation-only enhancement layer on top of the actual database schema.
 
-## When to Update Schema Metadata
+## When to Update Schema Override
 - If a table is removed from the actual schema, remove its references from schema-override.yml
 - If a review comment suggests better documentation for a table's purpose, add a comment
 - If tables are logically related but not grouped, create a table group
 - If important relationships between tables are not documented, add them
 
-## When NOT to Update Schema Metadata
+## When NOT to Update Schema Override
 - If comments mention migration procedures, rollbacks, or data integrity (irrelevant to metadata)
 - If there are concerns about query performance or database operations
 - If there's no clear suggestion to improve documentation or organization
@@ -76,7 +76,7 @@ schema-override.yml is a documentation-only enhancement layer on top of the actu
 
 </comment>
 
-## Current Schema Metadata
+## Current Schema Override
 <json>
 
 {currentSchemaOverride}
@@ -117,9 +117,9 @@ const UPDATE_TEMPLATE = ChatPromptTemplate.fromTemplate(`
 You are Liam, an expert in database schema design and optimization for this project.
 
 ## Your Task
-Create minimal, focused updates to the schema metadata based on the evaluation results.
+Create minimal, focused updates to the schema override based on the evaluation results.
 
-## Schema Metadata Purpose (CRITICAL)
+## Schema Override Purpose (CRITICAL)
 schema-override.yml is STRICTLY for documentation and organization:
 1. Documentation: Adding descriptive comments to existing tables and columns
 2. Relationships: Documenting logical connections between existing tables
@@ -151,7 +151,7 @@ It is NOT for:
 
 </json>
 
-## Current Schema Metadata
+## Current Schema Override
 <json>
 
 {currentSchemaOverride}
@@ -170,7 +170,7 @@ Your response must strictly follow this JSON Schema and maintain the existing st
 1. PRESERVE ALL EXISTING METADATA unless explicitly replacing or removing it
 2. If a table has been removed from the schema (like GitHubDocFilePath), remove all references to it from schema-override.yml
 3. ONLY focus on documentation and organization, not on actual schema changes
-4. Keep the same structure and format as the existing schema metadata
+4. Keep the same structure and format as the existing schema override
 5. Only add/modify sections that need changes based on documentation needs
 6. If adding new table groups, ensure they contain only existing tables
 7. Do not create empty objects - remove sections entirely if they become empty
@@ -239,7 +239,7 @@ export const generateSchemaOverride = async (
     )
 
     if (evaluationResult.updateNeeded) {
-      // Update is needed, generate new schema metadata
+      // Update is needed, generate new schema override
       const updateInput: UpdateInput = {
         reviewComment: inputs.reviewComment,
         currentSchemaOverride: inputs.currentSchemaOverride,

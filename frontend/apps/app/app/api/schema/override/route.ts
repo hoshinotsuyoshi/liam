@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
 
     if (!success) {
       return NextResponse.json(
-        { error: 'Failed to update schema metadata' },
+        { error: 'Failed to update schema override' },
         { status: 500 },
       )
     }

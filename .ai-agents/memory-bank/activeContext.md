@@ -4,7 +4,7 @@
 
 The current focus is on enhancing the Reviewer User experience with AI-driven analysis and suggestions integrated into the migration review process. Key areas of active development include:
 
-1. **Schema Metadata Generation Pipeline**: Improving the pipeline that creates and stores metadata suggestions based on PR reviews.
+1. **Schema Override Generation Pipeline**: Improving the pipeline that creates and stores metadata suggestions based on PR reviews.
 2. **Schema Change Detection**: Enhancing the detection system to better identify and analyze database migrations.
 3. **Review Prompt Template**: Refining the template to provide more detailed and contextual analysis.
 
@@ -18,11 +18,11 @@ The current focus is on enhancing the Reviewer User experience with AI-driven an
    - Updated package.json to replace @langchain/anthropic with @langchain/openai v0.5.5
    - This change standardizes the AI model usage across the application and potentially improves performance and cost-efficiency
 
-2. **Added Reasoning Field to KnowledgeSuggestion**: Enhanced the KnowledgeSuggestion table to store the rationale behind schema metadata update suggestions:
+2. **Added Reasoning Field to KnowledgeSuggestion**: Enhanced the KnowledgeSuggestion table to store the rationale behind schema override update suggestions:
    - Created a migration to add a `reasoning` TEXT field with a default empty string value
    - Updated the database.types.ts file to include the new field in the type definitions
    - Modified the KnowledgeSuggestionDetailPage.tsx component to display the reasoning field when available
-   - This enhancement helps users understand the context and rationale behind schema metadata update suggestions, enabling more informed decisions when approving suggestions
+   - This enhancement helps users understand the context and rationale behind schema override update suggestions, enabling more informed decisions when approving suggestions
 
 2. **OverallReview to KnowledgeSuggestion Relationship**: Implemented a relationship between OverallReview and KnowledgeSuggestion tables:
    - Created a new intermediate table `OverallReviewKnowledgeSuggestionMapping` to link OverallReview and KnowledgeSuggestion
@@ -69,14 +69,14 @@ The current focus is on enhancing the Reviewer User experience with AI-driven an
    - Enhanced prompt templates to include PR description and comments sections
    - Updated all related files for consistent terminology
 
-6. **Schema Metadata Generation**: Implemented a new pipeline that creates and stores metadata suggestions based on PR reviews, including:
+6. **Schema Override Generation**: Implemented a new pipeline that creates and stores metadata suggestions based on PR reviews, including:
    - New task (`generateSchemaOverrideSuggestionTask`) triggered after a review is saved
-   - Processing function (`processGenerateSchemaOverride`) for generating schema metadata suggestions
+   - Processing function (`processGenerateSchemaOverride`) for generating schema override suggestions
    - Integration with `createKnowledgeSuggestionTask` to store generated metadata
-   - Enhanced prompt with current schema metadata context for more informed suggestions
+   - Enhanced prompt with current schema override context for more informed suggestions
    - Added schema files content to the AI prompt for better context and more accurate suggestions
    - Created reusable utility function for fetching schema files content
-   - Type-safe validation of existing schema metadata using Valibot
+   - Type-safe validation of existing schema override using Valibot
 
 7. **Database Schema Optimization**:
    - Removed unused Doc and DocVersion models
@@ -218,7 +218,7 @@ The current focus is on enhancing the Reviewer User experience with AI-driven an
 4. **AI Components**:
    - Review prompt template quality directly impacts analysis quality
    - Continuous learning is essential for improving accuracy
-   - Schema metadata generation requires accurate analysis of changes
+   - Schema override generation requires accurate analysis of changes
 
 5. **Document Management**:
    - GitHub integration provides more direct document handling

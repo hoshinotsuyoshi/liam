@@ -32,7 +32,7 @@ export const fetchSchemaInfoWithOverrides = async (
   repositoryFullName: string,
   installationId: number,
 ): Promise<SchemaInfo> => {
-  // Fetch the current schema metadata file from GitHub
+  // Fetch the current schema override file from GitHub
   const { content: currentSchemaOverrideContent } = await getFileContent(
     repositoryFullName,
     SCHEMA_OVERRIDE_FILE_PATH,
@@ -40,7 +40,7 @@ export const fetchSchemaInfoWithOverrides = async (
     installationId,
   )
 
-  // Parse and validate the current schema metadata if it exists
+  // Parse and validate the current schema override if it exists
   let currentSchemaOverride: SchemaOverride | null = null
   if (currentSchemaOverrideContent) {
     const parsedJson = JSON.parse(currentSchemaOverrideContent)
