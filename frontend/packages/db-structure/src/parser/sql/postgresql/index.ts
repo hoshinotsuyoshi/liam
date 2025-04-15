@@ -7,7 +7,7 @@ import { parse } from './parser.js'
 import { processSQLInChunks } from './processSQLInChunks.js'
 
 /**
- * Processes SQL statements and constructs a database structure.
+ * Processes SQL statements and constructs a schema.
  */
 export const processor: Processor = async (sql: string) => {
   const schema: Schema = {

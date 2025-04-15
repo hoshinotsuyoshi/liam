@@ -12,9 +12,9 @@ import { SCHEMA_OVERRIDE_FILE_PATH } from '../constants'
 import { fetchSchemaFileContent } from './githubFileUtils'
 
 export type SchemaInfo = {
-  schema: Schema // Original database structure
-  overriddenSchema: Schema // Database structure with overrides applied
-  currentSchemaOverride: SchemaOverride | null // Current schema metadata
+  schema: Schema // Original schema
+  overriddenSchema: Schema // schema with overrides applied
+  currentSchemaOverride: SchemaOverride | null // Current schema override
 }
 
 /**
@@ -24,7 +24,7 @@ export type SchemaInfo = {
  * @param branchName - The branch name
  * @param repositoryFullName - The repository full name (owner/name)
  * @param installationId - The installation ID
- * @returns The schema information including original and overridden database structure
+ * @returns The schema information including original and overridden schema
  */
 export const fetchSchemaInfoWithOverrides = async (
   projectId: number,

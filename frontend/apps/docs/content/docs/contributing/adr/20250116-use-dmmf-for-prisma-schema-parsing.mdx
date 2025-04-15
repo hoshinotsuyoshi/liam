@@ -12,7 +12,7 @@ title: 20250116 - Use DMMF for Prisma Schema Parsing
 
 ## Context
 
-We need to parse Prisma schema files to extract database structure information. Several approaches were considered:
+We need to parse Prisma schema files to extract schema information. Several approaches were considered:
 
 1. JavaScript parsers (e.g., Acorn, Babel)
 2. Custom parsers using parser generators (e.g., PEG.js)
@@ -55,5 +55,5 @@ Key factors in this decision:
 
 ### Neutral
 
-- Need to transform DMMF output to match our internal database structure format
+- Need to transform DMMF output to match our internal schema format
 - Learning curve for working with DMMF API

@@ -83,7 +83,7 @@ schema-override.yml is a documentation-only enhancement layer on top of the actu
 
 </json>
 
-## Current Database Structure
+## Current Schema
 <json>
 
 {schema}
@@ -144,7 +144,7 @@ It is NOT for:
 
 </evaluationResults>
 
-## Current Database Structure
+## Current Schema
 <json>
 
 {schema}
@@ -182,7 +182,7 @@ Your response must strictly follow this JSON Schema and maintain the existing st
 
 3. Adding a relationship that documents a logical connection: Only document relationships between existing tables with correct column references.
 
-REMEMBER: schema-override.yml is ONLY for documentation and organization purposes, NOT for actual database structure changes.
+REMEMBER: schema-override.yml is ONLY for documentation and organization purposes, NOT for actual schema changes.
 `)
 
 export const generateSchemaOverride = async (
