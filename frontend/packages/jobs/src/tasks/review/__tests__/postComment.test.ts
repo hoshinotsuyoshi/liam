@@ -25,28 +25,28 @@ describe.skip('postComment', () => {
   const supabase = createClient()
 
   const testRepository = {
-    id: 9999,
+    id: '9999',
     name: 'test-repo',
     owner: 'test-owner',
-    installationId: 12345,
+    installationId: '12345',
     isActive: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }
 
   const testPullRequest = {
-    id: 9999,
+    id: '9999',
     pullNumber: 1,
-    repositoryId: 9999,
+    repositoryId: '9999',
     commentId: null,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }
 
   const testMigration = {
-    id: 9999,
+    id: '9999',
     title: 'Test Migration',
-    pullRequestId: 9999,
+    pullRequestId: '9999',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }
@@ -75,7 +75,7 @@ describe.skip('postComment', () => {
 
     const testPayload = {
       reviewComment: 'Test review comment',
-      projectId: 1,
+      projectId: '1',
       pullRequestId: testPullRequest.id,
       repositoryId: testRepository.id,
       branchName: 'test-branch',
@@ -114,7 +114,7 @@ Migration URL: ${process.env['NEXT_PUBLIC_BASE_URL']}/app/migrations/${testMigra
 
     const testPayload = {
       reviewComment: 'Updated review comment',
-      projectId: 1,
+      projectId: '1',
       pullRequestId: testPullRequest.id,
       repositoryId: testRepository.id,
       branchName: 'test-branch',
@@ -137,9 +137,9 @@ Migration URL: ${process.env['NEXT_PUBLIC_BASE_URL']}/app/migrations/${testMigra
   it('should throw error when repository not found', async () => {
     const testPayload = {
       reviewComment: 'Test review comment',
-      projectId: 1,
+      projectId: '1',
       pullRequestId: testPullRequest.id,
-      repositoryId: 999999, // Non-existent ID
+      repositoryId: '999999', // Non-existent ID
       branchName: 'test-branch',
       traceId: 'test-trace-id-123',
     }
@@ -152,8 +152,8 @@ Migration URL: ${process.env['NEXT_PUBLIC_BASE_URL']}/app/migrations/${testMigra
   it('should throw error when pull request not found', async () => {
     const testPayload = {
       reviewComment: 'Test review comment',
-      projectId: 1,
-      pullRequestId: 999999, // Non-existent ID
+      projectId: '1',
+      pullRequestId: '999999', // Non-existent ID
       repositoryId: testRepository.id,
       branchName: 'test-branch',
       traceId: 'test-trace-id-123',
@@ -166,7 +166,7 @@ Migration URL: ${process.env['NEXT_PUBLIC_BASE_URL']}/app/migrations/${testMigra
 
   it('should throw error when migration not found', async () => {
     const prWithoutMigration = {
-      id: 8888,
+      id: '8888',
       pullNumber: 2,
       repositoryId: testRepository.id,
       commentId: null,
@@ -178,7 +178,7 @@ Migration URL: ${process.env['NEXT_PUBLIC_BASE_URL']}/app/migrations/${testMigra
 
     const testPayload = {
       reviewComment: 'Test review comment',
-      projectId: 1,
+      projectId: '1',
       pullRequestId: prWithoutMigration.id,
       repositoryId: testRepository.id,
       branchName: 'test-branch',

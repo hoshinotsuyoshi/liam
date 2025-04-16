@@ -9,26 +9,26 @@ describe.skip('processSaveReview', () => {
   const supabase = createClient()
 
   const testRepository = {
-    id: 9999,
+    id: '9999',
     name: 'test-repo',
     owner: 'test-owner',
-    installationId: 12345,
+    installationId: '12345',
     isActive: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }
 
   const testPullRequest = {
-    id: 9999,
+    id: '9999',
     pullNumber: 9999,
-    repositoryId: 9999,
+    repositoryId: '9999',
     commentId: null,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }
 
   const testProject = {
-    id: 9999,
+    id: '9999',
     name: 'test-project',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
@@ -110,9 +110,9 @@ describe.skip('processSaveReview', () => {
 
   it('should throw error when pull request not found', async () => {
     const testPayload: ReviewResponse = {
-      pullRequestId: 999999,
-      projectId: 9999,
-      repositoryId: 9999,
+      pullRequestId: '999999',
+      projectId: '9999',
+      repositoryId: '9999',
       branchName: 'test-branch',
       traceId: 'test-trace-id-123',
       pullRequestNumber: 999,
@@ -131,9 +131,9 @@ describe.skip('processSaveReview', () => {
 
   it('should throw error when creating overall review fails', async () => {
     const testPayload: ReviewResponse = {
-      pullRequestId: 9999,
-      projectId: 999999,
-      repositoryId: 9999,
+      pullRequestId: '9999',
+      projectId: '999999',
+      repositoryId: '9999',
       branchName: 'test-branch',
       traceId: 'test-trace-id-123',
       pullRequestNumber: 999,
