@@ -10,11 +10,11 @@ import styles from './OrganizationDetailPage.module.css'
 
 interface OrganizationDetailPageProps {
   organization: {
-    id: number
+    id: string
     name: string
   }
   members: Array<{
-    id: number
+    id: string
     user: {
       id: string
       name: string
@@ -22,7 +22,7 @@ interface OrganizationDetailPageProps {
     }
   }> | null
   invites: Array<{
-    id: number
+    id: string
     email: string
     inviteBy: {
       id: string
