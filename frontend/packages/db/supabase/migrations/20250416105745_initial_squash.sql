@@ -246,17 +246,6 @@ CREATE TABLE IF NOT EXISTS "public"."MembershipInvites" (
 ALTER TABLE "public"."MembershipInvites" OWNER TO "postgres";
 
 
-ALTER TABLE "public"."MembershipInvites" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME "public"."MembershipInvites_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
-
 CREATE TABLE IF NOT EXISTS "public"."Migration" (
     "id" uuid NOT NULL DEFAULT gen_random_uuid(),
     "title" "text" NOT NULL,
@@ -295,26 +284,6 @@ CREATE TABLE IF NOT EXISTS "public"."OrganizationMember" (
 
 ALTER TABLE "public"."OrganizationMember" OWNER TO "postgres";
 
-
-ALTER TABLE "public"."OrganizationMember" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME "public"."OrganizationMember_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
-
-ALTER TABLE "public"."Organization" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME "public"."Organization_id_seq"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
 
 
 
@@ -460,7 +429,7 @@ ALTER TABLE "public"."ReviewFeedback" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."ReviewFeedbackComment" (
-    "id" uuid  DEFAULT gen_random_uuid()DEFAULT "nextval"('"public"."ReviewFeedbackComment_id_seq"'::"regclass") NOT NULL,
+    "id" uuid  DEFAULT gen_random_uuid(),
     "reviewFeedbackId" uuid NOT NULL,
     "userId" "uuid" NOT NULL,
     "content" "text" NOT NULL,
@@ -484,7 +453,7 @@ ALTER TABLE "public"."ReviewFeedbackComment" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."ReviewSuggestionSnippet" (
-    "id" uuid  DEFAULT gen_random_uuid()DEFAULT "nextval"('"public"."ReviewSuggestionSnippet_id_seq"'::"regclass") NOT NULL,
+    "id" uuid  DEFAULT gen_random_uuid(),
     "reviewFeedbackId" uuid NOT NULL,
     "filename" "text" NOT NULL,
     "snippet" "text" NOT NULL,
