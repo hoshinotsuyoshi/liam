@@ -18,7 +18,7 @@ import styles from './InstallationSelector.module.css'
 
 type Props = {
   installations: Installation[]
-  organizationId?: number
+  organizationId?: string
 }
 
 export const InstallationSelector: FC<Props> = ({

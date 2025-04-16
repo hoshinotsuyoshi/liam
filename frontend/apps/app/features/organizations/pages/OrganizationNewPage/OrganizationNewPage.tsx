@@ -28,7 +28,7 @@ export const OrganizationNewPage: FC = () => {
   const addUserToOrg = async (
     supabase: SupabaseClient,
     userId: string,
-    organizationId: number,
+    organizationId: string,
   ) => {
     const { error } = await supabase.from('OrganizationMember').insert({
       userId,

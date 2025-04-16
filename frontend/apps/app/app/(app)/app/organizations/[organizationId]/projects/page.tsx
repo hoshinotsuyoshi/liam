@@ -31,7 +31,7 @@ export default async function Page({ params }: PageProps) {
     .from('OrganizationMember')
     .select('id')
     .eq('userId', data.session.user.id)
-    .eq('organizationId', Number.parseInt(organizationId, 10))
+    .eq('organizationId', organizationId)
     .limit(1)
 
   if (orgError) {
@@ -42,5 +42,5 @@ export default async function Page({ params }: PageProps) {
     return notFound()
   }
 
-  return <ProjectsPage organizationId={Number.parseInt(organizationId, 10)} />
+  return <ProjectsPage organizationId={organizationId} />
 }

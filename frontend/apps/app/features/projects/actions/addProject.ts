@@ -22,9 +22,7 @@ export const addProject = async (formData: FormData) => {
       name: projectName,
       createdAt: now,
       updatedAt: now,
-      ...(organizationId
-        ? { organizationId: Number.parseInt(organizationId, 10) }
-        : {}),
+      ...(organizationId ? { organizationId } : {}),
     })
     .select()
     .single()
@@ -39,7 +37,7 @@ export const addProject = async (formData: FormData) => {
     .insert({
       name: repositoryName,
       owner: repositoryOwner,
-      installationId: Number(installationId),
+      installationId,
       isActive: true,
       updatedAt: now,
     })
