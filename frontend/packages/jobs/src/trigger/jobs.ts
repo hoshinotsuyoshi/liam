@@ -13,14 +13,14 @@ export const generateDocsSuggestionTask = task({
   id: 'generate-docs-suggestion',
   run: async (payload: {
     reviewComment: string
-    projectId: number
+    projectId: string
     pullRequestNumber: number
     owner: string
     name: string
-    installationId: number
+    installationId: string
     type: 'DOCS'
     branchName: string
-    overallReviewId: number
+    overallReviewId: string
   }) => {
     const { suggestions, traceId } = await processGenerateDocsSuggestion({
       reviewComment: payload.reviewComment,
@@ -88,7 +88,7 @@ export const generateSchemaOverrideSuggestionTask = task({
 export const createKnowledgeSuggestionTask = task({
   id: 'create-knowledge-suggestion',
   run: async (payload: {
-    projectId: number
+    projectId: string
     type: 'SCHEMA' | 'DOCS'
     title: string
     path: string
@@ -96,7 +96,7 @@ export const createKnowledgeSuggestionTask = task({
     branch: string
     traceId?: string
     reasoning: string
-    overallReviewId: number
+    overallReviewId: string
   }) => {
     logger.log('Executing create knowledge suggestion task:', { payload })
     try {

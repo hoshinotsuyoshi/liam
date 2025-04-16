@@ -58,10 +58,10 @@ export const processGenerateSchemaOverride = async (
     const repositoryFullName = `${repository.owner}/${repository.name}`
     const { currentSchemaOverride, overriddenSchema } =
       await fetchSchemaInfoWithOverrides(
-        Number(project.id),
+        project.id,
         overallReview.branchName,
         repositoryFullName,
-        Number(repository.installationId),
+        repository.installationId,
       )
 
     const schemaOverrideResult = await generateSchemaOverride(

@@ -4,7 +4,7 @@ import { createClient } from '../libs/supabase'
 type KnowledgeType = 'SCHEMA' | 'DOCS'
 
 type CreateKnowledgeSuggestionPayload = {
-  projectId: number
+  projectId: string
   type: KnowledgeType
   title: string
   path: string
@@ -12,18 +12,18 @@ type CreateKnowledgeSuggestionPayload = {
   branch: string
   traceId?: string
   reasoning?: string
-  overallReviewId?: number
+  overallReviewId?: string
 }
 
 type CreateKnowledgeSuggestionResult = {
-  suggestionId: number | null
+  suggestionId: string | null
   success: boolean
 }
 
 /**
  * Get repository information for a project
  */
-const getRepositoryInfo = async (projectId: number) => {
+const getRepositoryInfo = async (projectId: string) => {
   const supabase = createClient()
 
   const { data: project, error } = await supabase
@@ -46,20 +46,20 @@ const getRepositoryInfo = async (projectId: number) => {
   return {
     owner: repository.owner,
     name: repository.name,
-    installationId: Number(repository.installationId),
+    installationId: repository.installationId,
   }
 }
 
 type ContentCheckResult = {
   hasChanged: boolean
-  docFilePath: { id: number } | null
+  docFilePath: { id: string } | null
 }
 
 /**
  * Check if content has changed for a DOCS type suggestion
  */
 const hasContentChanged = async (
-  projectId: number,
+  projectId: string,
   path: string,
   existingContent: string | null,
   newContent: string,
@@ -95,8 +95,8 @@ const hasContentChanged = async (
  * Create a knowledge suggestion doc mapping
  */
 const createDocMapping = async (
-  knowledgeSuggestionId: number,
-  docFilePathId: number,
+  knowledgeSuggestionId: string,
+  docFilePathId: string,
   timestamp: string,
 ) => {
   const supabase = createClient()
@@ -117,8 +117,8 @@ const createDocMapping = async (
  * Create a mapping between OverallReview and KnowledgeSuggestion
  */
 const createOverallReviewMapping = async (
-  knowledgeSuggestionId: number,
-  overallReviewId: number,
+  knowledgeSuggestionId: string,
+  overallReviewId: string,
   timestamp: string,
 ) => {
   const supabase = createClient()
@@ -163,11 +163,11 @@ export const processCreateKnowledgeSuggestion = async (
       repositoryFullName,
       path,
       branch,
-      repo.installationId,
+      Number(repo.installationId),
     )
 
     // Default to no docFilePath
-    let docFilePath: { id: number } | null = null
+    let docFilePath: { id: string } | null = null
 
     // For DOCS type, check if content has changed
     if (type === 'DOCS') {

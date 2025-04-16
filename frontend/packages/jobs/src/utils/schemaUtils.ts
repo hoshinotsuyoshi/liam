@@ -28,17 +28,17 @@ export type SchemaInfo = {
  * @returns The schema information including original and overridden schema
  */
 export const fetchSchemaInfoWithOverrides = async (
-  projectId: number,
+  projectId: string,
   branchName: string,
   repositoryFullName: string,
-  installationId: number,
+  installationId: string,
 ): Promise<SchemaInfo> => {
   // Fetch the current schema override file from GitHub
   const { content: currentSchemaOverrideContent } = await getFileContent(
     repositoryFullName,
     SCHEMA_OVERRIDE_FILE_PATH,
     branchName,
-    installationId,
+    Number(installationId),
   )
 
   // Parse and validate the current schema override if it exists

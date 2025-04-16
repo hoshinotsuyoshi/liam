@@ -13,10 +13,10 @@ import { createClient } from '../libs/supabase'
  * @throws Error if schema path, format, or content cannot be retrieved
  */
 export const fetchSchemaFileContent = async (
-  projectId: number,
+  projectId: string,
   branchName: string,
   repositoryFullName: string,
-  installationId: number,
+  installationId: string,
 ): Promise<{ content: string; format: SupportedFormat }> => {
   try {
     const supabase = createClient()
@@ -52,7 +52,7 @@ export const fetchSchemaFileContent = async (
         repositoryFullName,
         schemaFilePath.path,
         branchName,
-        installationId,
+        Number(installationId),
       )
 
       if (!fileData.content) {
