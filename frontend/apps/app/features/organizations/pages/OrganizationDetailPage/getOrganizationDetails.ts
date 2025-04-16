@@ -6,7 +6,7 @@ export const getOrganizationDetails = async (organizationId: string) => {
   const { data: organization, error } = await supabase
     .from('Organization')
     .select('*')
-    .eq('id', Number.parseInt(organizationId, 10))
+    .eq('id', organizationId)
     .single()
 
   if (error) {
@@ -31,7 +31,7 @@ export const getOrganizationMembers = async (organizationId: string) => {
         email
       )
     `)
-    .eq('organizationId', Number.parseInt(organizationId, 10))
+    .eq('organizationId', organizationId)
 
   if (error) {
     console.error('Error fetching organization members:', error)
@@ -56,7 +56,7 @@ export const getOrganizationInvites = async (organizationId: string) => {
         email
       )
     `)
-    .eq('organizationId', Number.parseInt(organizationId, 10))
+    .eq('organizationId', organizationId)
 
   if (error) {
     console.error('Error fetching organization invites:', error)

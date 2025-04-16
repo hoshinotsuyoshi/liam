@@ -7,7 +7,7 @@ import { type FC, useEffect, useRef, useState } from 'react'
 import styles from './OrganizationSwitcher.module.css'
 
 interface Organization {
-  id: number
+  id: string
   name: string
 }
 

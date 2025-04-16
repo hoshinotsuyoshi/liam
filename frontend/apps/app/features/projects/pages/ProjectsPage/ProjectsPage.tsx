@@ -10,12 +10,12 @@ import {
 import { getProjects } from './getProjects'
 
 interface Organization {
-  id: number
+  id: string
   name: string
 }
 
 interface ProjectsPageProps {
-  organizationId?: number
+  organizationId?: string
 }
 
 export const ProjectsPage: FC<ProjectsPageProps> = async ({

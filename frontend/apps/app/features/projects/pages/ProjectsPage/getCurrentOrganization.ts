@@ -1,7 +1,7 @@
 import { createClient } from '@/libs/db/server'
 
 export const getCurrentOrganization = async (
-  specificOrganizationId?: number,
+  specificOrganizationId?: string,
 ) => {
   const supabase = await createClient()
 
