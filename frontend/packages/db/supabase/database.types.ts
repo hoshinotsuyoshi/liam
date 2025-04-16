@@ -37,26 +37,26 @@ export type Database = {
       GitHubDocFilePath: {
         Row: {
           createdAt: string
-          id: number
+          id: string
           isReviewEnabled: boolean
           path: string
-          projectId: number
+          projectId: string
           updatedAt: string
         }
         Insert: {
           createdAt?: string
-          id?: number
+          id?: string
           isReviewEnabled?: boolean
           path: string
-          projectId: number
+          projectId: string
           updatedAt: string
         }
         Update: {
           createdAt?: string
-          id?: number
+          id?: string
           isReviewEnabled?: boolean
           path?: string
-          projectId?: number
+          projectId?: string
           updatedAt?: string
         }
         Relationships: [
@@ -73,25 +73,25 @@ export type Database = {
         Row: {
           createdAt: string
           format: Database['public']['Enums']['SchemaFormatEnum']
-          id: number
+          id: string
           path: string
-          projectId: number
+          projectId: string
           updatedAt: string
         }
         Insert: {
           createdAt?: string
           format: Database['public']['Enums']['SchemaFormatEnum']
-          id?: number
+          id?: string
           path: string
-          projectId: number
+          projectId: string
           updatedAt: string
         }
         Update: {
           createdAt?: string
           format?: Database['public']['Enums']['SchemaFormatEnum']
-          id?: number
+          id?: string
           path?: string
-          projectId?: number
+          projectId?: string
           updatedAt?: string
         }
         Relationships: [
@@ -111,9 +111,9 @@ export type Database = {
           content: string
           createdAt: string
           fileSha: string | null
-          id: number
+          id: string
           path: string
-          projectId: number
+          projectId: string
           reasoning: string | null
           title: string
           traceId: string | null
@@ -126,9 +126,9 @@ export type Database = {
           content: string
           createdAt?: string
           fileSha?: string | null
-          id?: number
+          id?: string
           path: string
-          projectId: number
+          projectId: string
           reasoning?: string | null
           title: string
           traceId?: string | null
@@ -141,9 +141,9 @@ export type Database = {
           content?: string
           createdAt?: string
           fileSha?: string | null
-          id?: number
+          id?: string
           path?: string
-          projectId?: number
+          projectId?: string
           reasoning?: string | null
           title?: string
           traceId?: string | null
@@ -163,23 +163,23 @@ export type Database = {
       KnowledgeSuggestionDocMapping: {
         Row: {
           createdAt: string
-          gitHubDocFilePathId: number
-          id: number
-          knowledgeSuggestionId: number
+          gitHubDocFilePathId: string
+          id: string
+          knowledgeSuggestionId: string
           updatedAt: string
         }
         Insert: {
           createdAt?: string
-          gitHubDocFilePathId: number
-          id?: number
-          knowledgeSuggestionId: number
+          gitHubDocFilePathId: string
+          id?: string
+          knowledgeSuggestionId: string
           updatedAt: string
         }
         Update: {
           createdAt?: string
-          gitHubDocFilePathId?: number
-          id?: number
-          knowledgeSuggestionId?: number
+          gitHubDocFilePathId?: string
+          id?: string
+          knowledgeSuggestionId?: string
           updatedAt?: string
         }
         Relationships: [
@@ -202,24 +202,24 @@ export type Database = {
       MembershipInvites: {
         Row: {
           email: string
-          id: number
+          id: string
           inviteByUserId: string
           invitedAt: string | null
-          organizationId: number
+          organizationId: string
         }
         Insert: {
           email: string
-          id?: never
+          id?: string
           inviteByUserId: string
           invitedAt?: string | null
-          organizationId: number
+          organizationId: string
         }
         Update: {
           email?: string
-          id?: never
+          id?: string
           inviteByUserId?: string
           invitedAt?: string | null
-          organizationId?: number
+          organizationId?: string
         }
         Relationships: [
           {
@@ -241,22 +241,22 @@ export type Database = {
       Migration: {
         Row: {
           createdAt: string
-          id: number
-          pullRequestId: number
+          id: string
+          pullRequestId: string
           title: string
           updatedAt: string
         }
         Insert: {
           createdAt?: string
-          id?: number
-          pullRequestId: number
+          id?: string
+          pullRequestId: string
           title: string
           updatedAt: string
         }
         Update: {
           createdAt?: string
-          id?: number
-          pullRequestId?: number
+          id?: string
+          pullRequestId?: string
           title?: string
           updatedAt?: string
         }
@@ -272,36 +272,36 @@ export type Database = {
       }
       Organization: {
         Row: {
-          id: number
+          id: string
           name: string
         }
         Insert: {
-          id?: never
+          id?: string
           name: string
         }
         Update: {
-          id?: never
+          id?: string
           name?: string
         }
         Relationships: []
       }
       OrganizationMember: {
         Row: {
-          id: number
+          id: string
           joinedAt: string | null
-          organizationId: number
+          organizationId: string
           userId: string
         }
         Insert: {
-          id?: never
+          id?: string
           joinedAt?: string | null
-          organizationId: number
+          organizationId: string
           userId: string
         }
         Update: {
-          id?: never
+          id?: string
           joinedAt?: string | null
-          organizationId?: number
+          organizationId?: string
           userId?: string
         }
         Relationships: [
@@ -325,9 +325,9 @@ export type Database = {
         Row: {
           branchName: string
           createdAt: string
-          id: number
-          projectId: number | null
-          pullRequestId: number
+          id: string
+          projectId: string | null
+          pullRequestId: string
           reviewComment: string | null
           reviewedAt: string
           traceId: string | null
@@ -336,9 +336,9 @@ export type Database = {
         Insert: {
           branchName: string
           createdAt?: string
-          id?: number
-          projectId?: number | null
-          pullRequestId: number
+          id?: string
+          projectId?: string | null
+          pullRequestId: string
           reviewComment?: string | null
           reviewedAt?: string
           traceId?: string | null
@@ -347,9 +347,9 @@ export type Database = {
         Update: {
           branchName?: string
           createdAt?: string
-          id?: number
-          projectId?: number | null
-          pullRequestId?: number
+          id?: string
+          projectId?: string | null
+          pullRequestId?: string
           reviewComment?: string | null
           reviewedAt?: string
           traceId?: string | null
@@ -375,23 +375,23 @@ export type Database = {
       OverallReviewKnowledgeSuggestionMapping: {
         Row: {
           createdAt: string
-          id: number
-          knowledgeSuggestionId: number
-          overallReviewId: number
+          id: string
+          knowledgeSuggestionId: string
+          overallReviewId: string
           updatedAt: string
         }
         Insert: {
           createdAt?: string
-          id?: number
-          knowledgeSuggestionId: number
-          overallReviewId: number
+          id?: string
+          knowledgeSuggestionId: string
+          overallReviewId: string
           updatedAt: string
         }
         Update: {
           createdAt?: string
-          id?: number
-          knowledgeSuggestionId?: number
-          overallReviewId?: number
+          id?: string
+          knowledgeSuggestionId?: string
+          overallReviewId?: string
           updatedAt?: string
         }
         Relationships: [
@@ -414,23 +414,23 @@ export type Database = {
       Project: {
         Row: {
           createdAt: string
-          id: number
+          id: string
           name: string
-          organizationId: number | null
+          organizationId: string | null
           updatedAt: string
         }
         Insert: {
           createdAt?: string
-          id?: number
+          id?: string
           name: string
-          organizationId?: number | null
+          organizationId?: string | null
           updatedAt: string
         }
         Update: {
           createdAt?: string
-          id?: number
+          id?: string
           name?: string
-          organizationId?: number | null
+          organizationId?: string | null
           updatedAt?: string
         }
         Relationships: [
@@ -446,23 +446,23 @@ export type Database = {
       ProjectRepositoryMapping: {
         Row: {
           createdAt: string
-          id: number
-          projectId: number
-          repositoryId: number
+          id: string
+          projectId: string
+          repositoryId: string
           updatedAt: string
         }
         Insert: {
           createdAt?: string
-          id?: number
-          projectId: number
-          repositoryId: number
+          id?: string
+          projectId: string
+          repositoryId: string
           updatedAt: string
         }
         Update: {
           createdAt?: string
-          id?: number
-          projectId?: number
-          repositoryId?: number
+          id?: string
+          projectId?: string
+          repositoryId?: string
           updatedAt?: string
         }
         Relationships: [
@@ -486,25 +486,25 @@ export type Database = {
         Row: {
           commentId: number | null
           createdAt: string
-          id: number
+          id: string
           pullNumber: number
-          repositoryId: number
+          repositoryId: string
           updatedAt: string
         }
         Insert: {
           commentId?: number | null
           createdAt?: string
-          id?: number
+          id?: string
           pullNumber: number
-          repositoryId: number
+          repositoryId: string
           updatedAt: string
         }
         Update: {
           commentId?: number | null
           createdAt?: string
-          id?: number
+          id?: string
           pullNumber?: number
-          repositoryId?: number
+          repositoryId?: string
           updatedAt?: string
         }
         Relationships: [
@@ -520,8 +520,8 @@ export type Database = {
       Repository: {
         Row: {
           createdAt: string
-          id: number
-          installationId: number
+          id: string
+          installationId: string
           isActive: boolean
           name: string
           owner: string
@@ -529,8 +529,8 @@ export type Database = {
         }
         Insert: {
           createdAt?: string
-          id?: number
-          installationId: number
+          id?: string
+          installationId: string
           isActive?: boolean
           name: string
           owner: string
@@ -538,8 +538,8 @@ export type Database = {
         }
         Update: {
           createdAt?: string
-          id?: number
-          installationId?: number
+          id?: string
+          installationId?: string
           isActive?: boolean
           name?: string
           owner?: string
@@ -552,8 +552,8 @@ export type Database = {
           category: Database['public']['Enums']['CategoryEnum']
           createdAt: string
           description: string
-          id: number
-          overallReviewId: number
+          id: string
+          overallReviewId: string
           resolutionComment: string | null
           resolvedAt: string | null
           severity: Database['public']['Enums']['SeverityEnum']
@@ -564,8 +564,8 @@ export type Database = {
           category: Database['public']['Enums']['CategoryEnum']
           createdAt?: string
           description: string
-          id?: number
-          overallReviewId: number
+          id?: string
+          overallReviewId: string
           resolutionComment?: string | null
           resolvedAt?: string | null
           severity: Database['public']['Enums']['SeverityEnum']
@@ -576,8 +576,8 @@ export type Database = {
           category?: Database['public']['Enums']['CategoryEnum']
           createdAt?: string
           description?: string
-          id?: number
-          overallReviewId?: number
+          id?: string
+          overallReviewId?: string
           resolutionComment?: string | null
           resolvedAt?: string | null
           severity?: Database['public']['Enums']['SeverityEnum']
@@ -598,24 +598,24 @@ export type Database = {
         Row: {
           content: string
           createdAt: string
-          id: number
-          reviewFeedbackId: number
+          id: string
+          reviewFeedbackId: string
           updatedAt: string
           userId: string
         }
         Insert: {
           content: string
           createdAt?: string
-          id?: number
-          reviewFeedbackId: number
+          id?: string
+          reviewFeedbackId: string
           updatedAt: string
           userId: string
         }
         Update: {
           content?: string
           createdAt?: string
-          id?: number
-          reviewFeedbackId?: number
+          id?: string
+          reviewFeedbackId?: string
           updatedAt?: string
           userId?: string
         }
@@ -640,24 +640,24 @@ export type Database = {
         Row: {
           createdAt: string
           filename: string
-          id: number
-          reviewFeedbackId: number
+          id: string
+          reviewFeedbackId: string
           snippet: string
           updatedAt: string
         }
         Insert: {
           createdAt?: string
           filename: string
-          id?: number
-          reviewFeedbackId: number
+          id?: string
+          reviewFeedbackId: string
           snippet: string
           updatedAt: string
         }
         Update: {
           createdAt?: string
           filename?: string
-          id?: number
-          reviewFeedbackId?: number
+          id?: string
+          reviewFeedbackId?: string
           snippet?: string
           updatedAt?: string
         }
