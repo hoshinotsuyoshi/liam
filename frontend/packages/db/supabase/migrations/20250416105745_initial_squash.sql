@@ -163,7 +163,6 @@ ALTER TABLE "public"."GitHubDocFilePath" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."GitHubDocFilePath_id_seq" OWNER TO "postgres";
 
 
 
@@ -184,7 +183,6 @@ ALTER TABLE "public"."GitHubSchemaFilePath" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."GitHubSchemaFilePath_id_seq" OWNER TO "postgres";
 
 
 
@@ -224,7 +222,6 @@ ALTER TABLE "public"."KnowledgeSuggestionDocMapping" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."KnowledgeSuggestionDocMapping_id_seq" OWNER TO "postgres";
 
 
 
@@ -232,7 +229,6 @@ ALTER TABLE "public"."KnowledgeSuggestionDocMapping_id_seq" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."KnowledgeSuggestion_id_seq" OWNER TO "postgres";
 
 
 
@@ -275,7 +271,6 @@ ALTER TABLE "public"."Migration" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."Migration_id_seq" OWNER TO "postgres";
 
 
 
@@ -353,7 +348,6 @@ ALTER TABLE "public"."OverallReviewKnowledgeSuggestionMapping" OWNER TO "postgre
 
 
 
-ALTER TABLE "public"."OverallReviewKnowledgeSuggestionMapping_id_seq" OWNER TO "postgres";
 
 
 
@@ -361,7 +355,6 @@ ALTER TABLE "public"."OverallReviewKnowledgeSuggestionMapping_id_seq" OWNER TO "
 
 
 
-ALTER TABLE "public"."OverallReview_id_seq" OWNER TO "postgres";
 
 
 
@@ -392,7 +385,6 @@ ALTER TABLE "public"."ProjectRepositoryMapping" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."ProjectRepositoryMapping_id_seq" OWNER TO "postgres";
 
 
 
@@ -400,7 +392,6 @@ ALTER TABLE "public"."ProjectRepositoryMapping_id_seq" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."Project_id_seq" OWNER TO "postgres";
 
 
 
@@ -421,7 +412,6 @@ ALTER TABLE "public"."PullRequest" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."PullRequest_id_seq" OWNER TO "postgres";
 
 
 
@@ -443,7 +433,6 @@ ALTER TABLE "public"."Repository" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."Repository_id_seq" OWNER TO "postgres";
 
 
 
@@ -468,7 +457,6 @@ ALTER TABLE "public"."ReviewFeedback" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."ReviewFeedbackComment_id_seq" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."ReviewFeedbackComment" (
@@ -486,7 +474,6 @@ ALTER TABLE "public"."ReviewFeedbackComment" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."ReviewFeedback_id_seq" OWNER TO "postgres";
 
 
 
@@ -494,7 +481,6 @@ ALTER TABLE "public"."ReviewFeedback_id_seq" OWNER TO "postgres";
 
 
 
-ALTER TABLE "public"."ReviewSuggestionSnippet_id_seq" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."ReviewSuggestionSnippet" (
@@ -520,51 +506,39 @@ CREATE TABLE IF NOT EXISTS "public"."User" (
 ALTER TABLE "public"."User" OWNER TO "postgres";
 
 
-ALTER TABLE ONLY "public"."GitHubDocFilePath" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."GitHubDocFilePath_id_seq"'::"regclass");
 
 
 
-ALTER TABLE ONLY "public"."GitHubSchemaFilePath" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."GitHubSchemaFilePath_id_seq"'::"regclass");
 
 
 
-ALTER TABLE ONLY "public"."KnowledgeSuggestion" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."KnowledgeSuggestion_id_seq"'::"regclass");
 
 
 
-ALTER TABLE ONLY "public"."KnowledgeSuggestionDocMapping" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."KnowledgeSuggestionDocMapping_id_seq"'::"regclass");
 
 
 
-ALTER TABLE ONLY "public"."Migration" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."Migration_id_seq"'::"regclass");
 
 
 
-ALTER TABLE ONLY "public"."OverallReview" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."OverallReview_id_seq"'::"regclass");
 
 
 
-ALTER TABLE ONLY "public"."OverallReviewKnowledgeSuggestionMapping" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."OverallReviewKnowledgeSuggestionMapping_id_seq"'::"regclass");
 
 
 
-ALTER TABLE ONLY "public"."Project" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."Project_id_seq"'::"regclass");
 
 
 
-ALTER TABLE ONLY "public"."ProjectRepositoryMapping" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."ProjectRepositoryMapping_id_seq"'::"regclass");
 
 
 
-ALTER TABLE ONLY "public"."PullRequest" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."PullRequest_id_seq"'::"regclass");
 
 
 
-ALTER TABLE ONLY "public"."Repository" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."Repository_id_seq"'::"regclass");
 
 
 
-ALTER TABLE ONLY "public"."ReviewFeedback" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."ReviewFeedback_id_seq"'::"regclass");
 
 
 
@@ -1138,9 +1112,6 @@ GRANT ALL ON TABLE "public"."GitHubDocFilePath" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."GitHubDocFilePath_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."GitHubDocFilePath_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."GitHubDocFilePath_id_seq" TO "service_role";
 
 
 
@@ -1150,9 +1121,6 @@ GRANT ALL ON TABLE "public"."GitHubSchemaFilePath" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."GitHubSchemaFilePath_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."GitHubSchemaFilePath_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."GitHubSchemaFilePath_id_seq" TO "service_role";
 
 
 
@@ -1168,15 +1136,9 @@ GRANT ALL ON TABLE "public"."KnowledgeSuggestionDocMapping" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."KnowledgeSuggestionDocMapping_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."KnowledgeSuggestionDocMapping_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."KnowledgeSuggestionDocMapping_id_seq" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."KnowledgeSuggestion_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."KnowledgeSuggestion_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."KnowledgeSuggestion_id_seq" TO "service_role";
 
 
 
@@ -1186,9 +1148,6 @@ GRANT ALL ON TABLE "public"."MembershipInvites" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."MembershipInvites_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."MembershipInvites_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."MembershipInvites_id_seq" TO "service_role";
 
 
 
@@ -1198,9 +1157,6 @@ GRANT ALL ON TABLE "public"."Migration" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."Migration_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."Migration_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."Migration_id_seq" TO "service_role";
 
 
 
@@ -1216,15 +1172,9 @@ GRANT ALL ON TABLE "public"."OrganizationMember" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."OrganizationMember_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."OrganizationMember_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."OrganizationMember_id_seq" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."Organization_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."Organization_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."Organization_id_seq" TO "service_role";
 
 
 
@@ -1240,15 +1190,9 @@ GRANT ALL ON TABLE "public"."OverallReviewKnowledgeSuggestionMapping" TO "servic
 
 
 
-GRANT ALL ON SEQUENCE "public"."OverallReviewKnowledgeSuggestionMapping_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."OverallReviewKnowledgeSuggestionMapping_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."OverallReviewKnowledgeSuggestionMapping_id_seq" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."OverallReview_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."OverallReview_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."OverallReview_id_seq" TO "service_role";
 
 
 
@@ -1264,15 +1208,9 @@ GRANT ALL ON TABLE "public"."ProjectRepositoryMapping" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."ProjectRepositoryMapping_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."ProjectRepositoryMapping_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."ProjectRepositoryMapping_id_seq" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."Project_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."Project_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."Project_id_seq" TO "service_role";
 
 
 
@@ -1282,9 +1220,6 @@ GRANT ALL ON TABLE "public"."PullRequest" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."PullRequest_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."PullRequest_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."PullRequest_id_seq" TO "service_role";
 
 
 
@@ -1294,9 +1229,6 @@ GRANT ALL ON TABLE "public"."Repository" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."Repository_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."Repository_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."Repository_id_seq" TO "service_role";
 
 
 
@@ -1306,9 +1238,6 @@ GRANT ALL ON TABLE "public"."ReviewFeedback" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."ReviewFeedbackComment_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."ReviewFeedbackComment_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."ReviewFeedbackComment_id_seq" TO "service_role";
 
 
 
@@ -1318,15 +1247,9 @@ GRANT ALL ON TABLE "public"."ReviewFeedbackComment" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."ReviewFeedback_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."ReviewFeedback_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."ReviewFeedback_id_seq" TO "service_role";
 
 
 
-GRANT ALL ON SEQUENCE "public"."ReviewSuggestionSnippet_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "public"."ReviewSuggestionSnippet_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "public"."ReviewSuggestionSnippet_id_seq" TO "service_role";
 
 
 
