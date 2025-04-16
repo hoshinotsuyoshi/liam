@@ -4,7 +4,7 @@ export interface ProjectRepository {
   repository: {
     name: string
     owner: string
-    installationId: number
+    installationId: string
   }
 }
 
@@ -24,7 +24,7 @@ export const getProjectRepository = async (
           )
         )
       `)
-      .eq('id', Number(projectId))
+      .eq('id', projectId)
       .single()
 
     if (error) {
@@ -41,7 +41,7 @@ export const getProjectRepository = async (
       repository: {
         name: repository.name,
         owner: repository.owner,
-        installationId: Number(repository.installationId),
+        installationId: repository.installationId,
       },
     }
   } catch (error) {

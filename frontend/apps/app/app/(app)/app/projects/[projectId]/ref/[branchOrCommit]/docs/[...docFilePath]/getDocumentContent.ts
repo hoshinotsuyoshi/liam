@@ -27,7 +27,7 @@ export const getDocumentContent = async ({
       repositoryFullName,
       filePath,
       branchOrCommit,
-      repository.installationId,
+      Number(repository.installationId),
     )
 
     return fileData.content

@@ -20,7 +20,7 @@ export async function getOriginalDocumentContent(
       repositoryFullName,
       docPath,
       branchOrCommit,
-      repository.installationId,
+      Number(repository.installationId),
     )
 
     return fileData.content

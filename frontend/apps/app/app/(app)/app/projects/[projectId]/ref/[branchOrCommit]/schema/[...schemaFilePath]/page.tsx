@@ -20,14 +20,14 @@ import ERDViewer from './erdViewer'
 const processOverrideFile = async (
   repositoryFullName: string,
   branchOrCommit: string,
-  installationId: number,
+  installationId: string | number,
   schema: Schema,
 ) => {
   const { content: overrideContent } = await getFileContent(
     repositoryFullName,
     SCHEMA_OVERRIDE_FILE_PATH,
     branchOrCommit,
-    installationId,
+    Number(installationId),
   )
 
   if (overrideContent === null) {
@@ -92,13 +92,13 @@ export default async function Page({ params }: PageProps) {
           )
         )
       `)
-      .eq('id', Number(projectId))
+      .eq('id', projectId)
       .single()
 
     const { data: gitHubSchemaFilePath } = await supabase
       .from('GitHubSchemaFilePath')
       .select('path, format')
-      .eq('projectId', Number(projectId))
+      .eq('projectId', projectId)
       .eq('path', filePath)
       .single()
 
