@@ -390,7 +390,7 @@ CREATE TABLE IF NOT EXISTS "public"."Repository" (
     "id" uuid NOT NULL DEFAULT gen_random_uuid(),
     "name" "text" NOT NULL,
     "owner" "text" NOT NULL,
-    "installationId" uuid NOT NULL,
+    "installationId" integer NOT NULL,
     "isActive" boolean DEFAULT true NOT NULL,
     "createdAt" timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     "updatedAt" timestamp(3) without time zone NOT NULL

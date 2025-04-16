@@ -521,7 +521,7 @@ export type Database = {
         Row: {
           createdAt: string
           id: string
-          installationId: string
+          installationId: number
           isActive: boolean
           name: string
           owner: string
@@ -530,7 +530,7 @@ export type Database = {
         Insert: {
           createdAt?: string
           id?: string
-          installationId: string
+          installationId: number
           isActive?: boolean
           name: string
           owner: string
@@ -539,7 +539,7 @@ export type Database = {
         Update: {
           createdAt?: string
           id?: string
-          installationId?: string
+          installationId?: number
           isActive?: boolean
           name?: string
           owner?: string
