@@ -619,21 +619,6 @@ CREATE TABLE IF NOT EXISTS "public"."User" (
 ALTER TABLE "public"."User" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "public"."_prisma_migrations" (
-    "id" character varying(36) NOT NULL,
-    "checksum" character varying(64) NOT NULL,
-    "finished_at" timestamp with time zone,
-    "migration_name" character varying(255) NOT NULL,
-    "logs" "text",
-    "rolled_back_at" timestamp with time zone,
-    "started_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "applied_steps_count" integer DEFAULT 0 NOT NULL
-);
-
-
-ALTER TABLE "public"."_prisma_migrations" OWNER TO "postgres";
-
-
 ALTER TABLE ONLY "public"."GitHubDocFilePath" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."GitHubDocFilePath_id_seq"'::"regclass");
 
 
@@ -784,11 +769,6 @@ ALTER TABLE ONLY "public"."User"
 
 ALTER TABLE ONLY "public"."User"
     ADD CONSTRAINT "User_pkey" PRIMARY KEY ("id");
-
-
-
-ALTER TABLE ONLY "public"."_prisma_migrations"
-    ADD CONSTRAINT "_prisma_migrations_pkey" PRIMARY KEY ("id");
 
 
 
