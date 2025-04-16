@@ -1461,6 +1461,12 @@ GRANT ALL ON TABLE "public"."User" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."_prisma_migrations" TO "anon";
+GRANT ALL ON TABLE "public"."_prisma_migrations" TO "authenticated";
+GRANT ALL ON TABLE "public"."_prisma_migrations" TO "service_role";
+
+
+
 
 
 
