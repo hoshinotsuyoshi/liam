@@ -289,7 +289,7 @@ ALTER TABLE "public"."OrganizationMember" OWNER TO "postgres";
 
 CREATE TABLE IF NOT EXISTS "public"."OverallReview" (
     "id" uuid NOT NULL DEFAULT gen_random_uuid(),
-    "projectId" integer,
+    "projectId" uuid,
     "pullRequestId" uuid NOT NULL,
     "reviewComment" "text",
     "reviewedAt" timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
