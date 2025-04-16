@@ -9,13 +9,13 @@ import { generateReviewTask } from './generateReview'
 
 type SavePullRequestPayload = {
   prNumber: number
-  projectId: number
+  projectId: string
 }
 
 export type SavePullRequestResult = {
   success: boolean
-  prId: number
-  repositoryId: number
+  prId: string
+  repositoryId: string
   schemaFile: {
     filename: string
     content: string
@@ -38,8 +38,8 @@ export type SavePullRequestResult = {
 }
 
 type Repository = {
-  id: number
-  installationId: number | string
+  id: string
+  installationId: string
   owner: string
   name: string
 }
@@ -66,7 +66,7 @@ type SchemaFile = {
 
 async function getRepositoryFromProjectId(
   supabase: SupabaseClient,
-  projectId: number,
+  projectId: string,
 ): Promise<Repository> {
   const { data: projectMapping, error: mappingError } = await supabase
     .from('ProjectRepositoryMapping')
@@ -87,7 +87,7 @@ async function getRepositoryFromProjectId(
 
 async function getSchemaPathForProject(
   supabase: SupabaseClient,
-  projectId: number,
+  projectId: string,
 ): Promise<string> {
   const { data, error } = await supabase
     .from('GitHubSchemaFilePath')
@@ -146,9 +146,9 @@ function formatFileChangesData(
 
 async function getOrCreatePullRequestRecord(
   supabase: SupabaseClient,
-  repositoryId: number,
+  repositoryId: string,
   pullNumber: number,
-): Promise<{ id: number }> {
+): Promise<{ id: string }> {
   const { data: existingPR } = await supabase
     .from('PullRequest')
     .select('id')
@@ -182,7 +182,7 @@ async function getOrCreatePullRequestRecord(
 
 async function createOrUpdateMigrationRecord(
   supabase: SupabaseClient,
-  pullRequestId: number,
+  pullRequestId: string,
   title: string,
 ): Promise<void> {
   const { data: existingMigration } = await supabase

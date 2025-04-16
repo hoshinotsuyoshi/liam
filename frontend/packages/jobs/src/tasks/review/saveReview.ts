@@ -10,7 +10,7 @@ import { postCommentTask } from './postComment'
 
 export const processSaveReview = async (
   payload: ReviewResponse,
-): Promise<{ success: boolean; overallReviewId: number }> => {
+): Promise<{ success: boolean; overallReviewId: string }> => {
   try {
     const supabase = createClient()
     const { data: pullRequest, error: pullRequestError } = await supabase
@@ -79,7 +79,7 @@ export const processSaveReview = async (
           item,
         ): item is {
           feedback: (typeof payload.review.feedbacks)[0]
-          reviewFeedbackId: number
+          reviewFeedbackId: string
         } => item !== null && item.feedback.severity !== 'POSITIVE',
       )
       .flatMap(({ feedback, reviewFeedbackId }) =>
@@ -91,7 +91,7 @@ export const processSaveReview = async (
       ) as Array<{
       filename: string
       snippet: string
-      reviewFeedbackId: number
+      reviewFeedbackId: string
       updatedAt: string
     }>
 
