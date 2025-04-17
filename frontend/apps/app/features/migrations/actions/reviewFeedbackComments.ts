@@ -6,13 +6,13 @@ import * as v from 'valibot'
 
 // Schema for adding a comment
 const addCommentSchema = v.object({
-  feedbackId: v.pipe(v.number()),
+  feedbackId: v.pipe(v.string()),
   content: v.pipe(v.string(), v.minLength(1, 'Comment cannot be empty')),
 })
 
 // Schema for fetching comments
 const getCommentsSchema = v.object({
-  feedbackId: v.pipe(v.number()),
+  feedbackId: v.pipe(v.string()),
 })
 
 // Type for a comment with user information

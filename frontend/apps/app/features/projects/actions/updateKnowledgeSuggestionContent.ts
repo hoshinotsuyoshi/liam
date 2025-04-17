@@ -4,10 +4,7 @@ import { createClient } from '@/libs/db/server'
 import * as v from 'valibot'
 
 const formDataSchema = v.object({
-  suggestionId: v.pipe(
-    v.string(),
-    v.transform((value) => Number(value)),
-  ),
+  suggestionId: v.pipe(v.string()),
   content: v.string(),
 })
 

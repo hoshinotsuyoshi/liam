@@ -11,7 +11,7 @@ import {
 
 type ReviewFeedback = Tables<'ReviewFeedback'> & {
   suggestionSnippets: Array<{
-    id: number
+    id: string
     filename: string
     snippet: string
   }>

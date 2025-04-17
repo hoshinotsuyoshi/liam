@@ -107,7 +107,7 @@ export const ReviewFeedbackList: React.FC<ReviewFeedbackListProps> = ({
               </div>
             )}
             {feedback.suggestionSnippets?.map(
-              (snippet: { filename: string; snippet: string; id: number }) => (
+              (snippet: { filename: string; snippet: string; id: string }) => (
                 <div key={snippet.filename} className={styles.snippetContainer}>
                   <div className={styles.snippetHeader}>
                     <span className={styles.fileIcon}>📄</span>

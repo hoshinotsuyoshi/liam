@@ -14,7 +14,7 @@ export const categoryEnum = {
 export type CategoryEnum = (typeof categoryEnum)[keyof typeof categoryEnum]
 
 export type ReviewScore = {
-  id: number
+  id: string
   overallReviewId: string
   overallScore: number
   category: CategoryEnum

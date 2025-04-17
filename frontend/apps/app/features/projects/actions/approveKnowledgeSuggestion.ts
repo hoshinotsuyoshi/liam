@@ -9,10 +9,7 @@ import * as v from 'valibot'
 
 // Define schema for form data validation with transforms
 const formDataSchema = v.object({
-  suggestionId: v.pipe(
-    v.string(),
-    v.transform((value) => Number(value)),
-  ),
+  suggestionId: v.pipe(v.string()),
   repositoryOwner: v.string(),
   repositoryName: v.string(),
   installationId: v.pipe(

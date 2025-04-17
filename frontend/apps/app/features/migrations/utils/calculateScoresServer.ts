@@ -9,7 +9,7 @@ export type ReviewFeedbackForScore = {
 }
 
 export type CalculatedScore = {
-  id: number
+  id: string
   overallReviewId: string
   overallScore: number
   category: CategoryEnum
@@ -57,8 +57,8 @@ export const calculateScoresFromIssues = (
       score = Math.max(0, score)
 
       return {
-        id: Number.parseInt(category, 10), // Use category as ID
-        overallReviewId: 0, // Not needed anymore
+        id: category, // Use category as ID
+        overallReviewId: '', // Not needed anymore
         overallScore: score,
         category: category as CategoryEnum,
       }

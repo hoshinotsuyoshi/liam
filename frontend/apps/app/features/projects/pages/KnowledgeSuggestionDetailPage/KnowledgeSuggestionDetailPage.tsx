@@ -53,10 +53,7 @@ async function getKnowledgeSuggestionDetail(
 ) {
   try {
     // Get the knowledge suggestion with project info
-    const suggestion = await getSuggestionWithProject(
-      Number(suggestionId),
-      projectId,
-    )
+    const suggestion = await getSuggestionWithProject(suggestionId, projectId)
 
     if (!suggestion) {
       console.error('Error fetching knowledge suggestion')

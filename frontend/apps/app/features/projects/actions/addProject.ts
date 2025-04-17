@@ -37,7 +37,7 @@ export const addProject = async (formData: FormData) => {
     .insert({
       name: repositoryName,
       owner: repositoryOwner,
-      installationId,
+      installationId: Number(installationId),
       isActive: true,
       updatedAt: now,
     })

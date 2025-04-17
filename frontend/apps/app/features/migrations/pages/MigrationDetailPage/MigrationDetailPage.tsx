@@ -40,7 +40,7 @@ async function getMigrationContents(migrationId: string) {
         )
       )
     `)
-    .eq('id', Number(migrationId))
+    .eq('id', migrationId)
     .single()
 
   if (migrationError || !migration) {
@@ -79,17 +79,17 @@ async function getMigrationContents(migrationId: string) {
     .single()
 
   const prDetails = await getPullRequestDetails(
-    Number(repository.installationId),
+    repository.installationId,
     repository.owner,
     repository.name,
-    Number(pullRequest.pullNumber),
+    pullRequest.pullNumber,
   )
 
   const files = await getPullRequestFiles(
-    Number(repository.installationId),
+    repository.installationId,
     repository.owner,
     repository.name,
-    Number(pullRequest.pullNumber),
+    pullRequest.pullNumber,
   )
 
   // If there's no overallReview, return with empty review data
@@ -112,7 +112,7 @@ async function getMigrationContents(migrationId: string) {
   const { data: schemaPath, error: pathError } = await supabase
     .from('GitHubSchemaFilePath')
     .select('path')
-    .eq('projectId', overallReview.projectId || 0)
+    .eq('projectId', overallReview.projectId || '')
     .single()
 
   if (pathError) {

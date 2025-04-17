@@ -47,14 +47,14 @@ export function formatReviewFeedback({
  */
 export function formatAllReviewFeedbacks(
   feedbacks: Array<{
-    id: number
+    id: string
     category: string
     severity: string
     description: string
     suggestion: string
     resolvedAt?: string | null
     suggestionSnippets: Array<{
-      id: number
+      id: string
       filename: string
       snippet: string
     }>

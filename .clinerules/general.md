@@ -44,7 +44,7 @@ Follow these rules when you write code:
 
   // Better: Use valibot for runtime type validation
   const UserSchema = object({
-    id: number(),
+    id: string(),
     name: string(),
     email: string(),
   });
@@ -56,7 +56,7 @@ Follow these rules when you write code:
   ```typescript
   // Avoid defining database types manually
   type ReviewIssue = {
-    id: number;
+    id: string;
     description: string;
     // ...
   };
