@@ -15,9 +15,6 @@ export default async function Page({ params }: PageProps) {
 
   const { projectId, branchOrCommit } = parsedParams.output
   return (
-    <BranchDetailPage
-      projectId={Number(projectId)}
-      branchOrCommit={branchOrCommit}
-    />
+    <BranchDetailPage projectId={projectId} branchOrCommit={branchOrCommit} />
   )
 }

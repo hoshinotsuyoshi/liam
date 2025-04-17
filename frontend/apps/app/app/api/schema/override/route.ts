@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
           )
         )
       `)
-      .eq('id', Number(projectId))
+      .eq('id', projectId)
       .single()
 
     const repository = project?.ProjectRepositoryMapping[0].Repository

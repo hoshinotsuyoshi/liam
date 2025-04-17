@@ -5,7 +5,7 @@ type CheckSchemaChangesParams = {
   installationId: number
   pullRequestNumber: number
   pullRequestTitle: string
-  projectId: number
+  projectId: string
   owner: string
   name: string
 }

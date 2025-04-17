@@ -5,11 +5,11 @@ import { notFound } from 'next/navigation'
 import styles from './BranchDetailPage.module.css'
 
 type Props = {
-  projectId: number
+  projectId: string
   branchOrCommit: string
 }
 
-async function getBranchDetails(projectId: number) {
+async function getBranchDetails(projectId: string) {
   const supabase = await createClient()
   const { data: project, error } = await supabase
     .from('Project')

@@ -12,7 +12,7 @@ import styles from './KnowledgeSuggestionDetailPage.module.css'
 
 async function getSuggestionWithProject(
   suggestionId: number,
-  projectId: number,
+  projectId: string,
 ) {
   const supabase = await createClient()
 
@@ -55,7 +55,7 @@ async function getKnowledgeSuggestionDetail(
     // Get the knowledge suggestion with project info
     const suggestion = await getSuggestionWithProject(
       Number(suggestionId),
-      Number(projectId),
+      projectId,
     )
 
     if (!suggestion) {

@@ -48,7 +48,7 @@ const createMapping = async (
  */
 const handleDocFilePath = async (
   supabase: SupabaseClient,
-  suggestion: { projectId: number; path: string; type: string },
+  suggestion: { projectId: string; path: string; type: string },
   suggestionId: number,
 ) => {
   // Check if there's a GitHubDocFilePath entry for this path

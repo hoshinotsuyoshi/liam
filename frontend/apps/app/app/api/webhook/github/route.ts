@@ -41,7 +41,7 @@ const verifySignature = (
 // Get repository and project information
 const getProjectInfo = async (
   installationId: number,
-): Promise<{ projectId: number } | null> => {
+): Promise<{ projectId: string } | null> => {
   const supabase = await createClient()
 
   const { data: repository, error: repositoryError } = await supabase

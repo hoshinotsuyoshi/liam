@@ -10,7 +10,7 @@ import type { SuggestionWithProject } from './KnowledgeSuggestionDetailPage'
 
 async function getGithubSchemaFilePath(projectId: string) {
   try {
-    const projectId_num = Number(projectId)
+    const projectId_num = projectId
     const supabase = await createClient()
     const { data: gitHubSchemaFilePath, error } = await supabase
       .from('GitHubSchemaFilePath')

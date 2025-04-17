@@ -24,7 +24,7 @@ async function getProjectAndBranches(projectId: string) {
           )
         )
       `)
-      .eq('id', Number(projectId))
+      .eq('id', projectId)
       .single()
 
     if (error || !project) {

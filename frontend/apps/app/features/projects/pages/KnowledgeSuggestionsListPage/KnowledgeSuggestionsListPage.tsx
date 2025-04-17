@@ -14,7 +14,7 @@ async function getKnowledgeSuggestions(
   projectId: string,
   branchOrCommit: string,
 ) {
-  const projectId_num = Number(projectId)
+  const projectId_num = projectId
   const supabase = await createClient()
 
   const { data: knowledgeSuggestions, error } = await supabase

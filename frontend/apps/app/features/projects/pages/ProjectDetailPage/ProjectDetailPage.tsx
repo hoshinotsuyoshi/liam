@@ -32,7 +32,7 @@ async function getProject(projectId: string) {
           )
         )
       `)
-      .eq('id', Number(projectId))
+      .eq('id', projectId)
       .single()
 
     if (error || !project) {
