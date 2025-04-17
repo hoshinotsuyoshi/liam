@@ -24,7 +24,7 @@ export type CommentWithUser = Tables<'ReviewFeedbackComment'> & {
  * Add a comment to a review feedback
  */
 export async function addReviewFeedbackComment(data: {
-  feedbackId: number
+  feedbackId: string
   content: string
 }) {
   // Validate input data
@@ -72,7 +72,7 @@ export async function addReviewFeedbackComment(data: {
  * Get comments for a review feedback with user information
  */
 export async function getReviewFeedbackComments(data: {
-  feedbackId: number
+  feedbackId: string
 }): Promise<CommentWithUser[]> {
   // Validate input data
   const parsedData = v.safeParse(getCommentsSchema, data)

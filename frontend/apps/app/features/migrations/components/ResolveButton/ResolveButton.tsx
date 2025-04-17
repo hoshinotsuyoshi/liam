@@ -8,7 +8,7 @@ import { ResolutionCommentModal } from '../ResolutionCommentModal/ResolutionComm
 import styles from './ResolveButton.module.css'
 
 interface ResolveButtonProps {
-  feedbackId: number
+  feedbackId: string
   isResolved: boolean
   resolutionComment?: string | null
   onResolve: (comment: string) => void

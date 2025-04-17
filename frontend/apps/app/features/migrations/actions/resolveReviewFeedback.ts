@@ -4,12 +4,12 @@ import { createClient } from '@/libs/db/server'
 import * as v from 'valibot'
 
 const requestSchema = v.object({
-  feedbackId: v.pipe(v.number()),
+  feedbackId: v.pipe(v.string()),
   resolutionComment: v.optional(v.nullable(v.string())),
 })
 
 export const resolveReviewFeedback = async (data: {
-  feedbackId: number
+  feedbackId: string
   resolutionComment?: string | null
 }) => {
   const parsedData = v.safeParse(requestSchema, data)

@@ -15,7 +15,7 @@ describe('checkSchemaChanges', () => {
   const mockSchemaParams = {
     pullRequestNumber: 1,
     pullRequestTitle: 'Update schema',
-    projectId: 100,
+    projectId: '100',
     owner: 'user',
     name: 'repo',
     installationId: 1,
