@@ -6,7 +6,7 @@ import { CommentsModal } from './CommentsModal/CommentsModal'
 import styles from './ReviewFeedbackComments.module.css'
 
 interface ReviewFeedbackCommentsProps {
-  reviewFeedbackId: number
+  reviewFeedbackId: string
 }
 
 export const ReviewFeedbackComments = ({

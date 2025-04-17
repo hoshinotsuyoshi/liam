@@ -10,7 +10,7 @@ export type ReviewFeedbackForScore = {
 
 export type CalculatedScore = {
   id: number
-  overallReviewId: number
+  overallReviewId: string
   overallScore: number
   category: CategoryEnum
 }

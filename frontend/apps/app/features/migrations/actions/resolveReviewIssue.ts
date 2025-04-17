@@ -9,7 +9,7 @@ const requestSchema = v.object({
 })
 
 export const resolveReviewFeedback = async (data: {
-  issueId: number
+  issueId: string
   resolutionComment?: string | null
 }) => {
   const parsedData = v.safeParse(requestSchema, data)

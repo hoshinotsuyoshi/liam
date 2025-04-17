@@ -26,8 +26,8 @@ const formDataSchema = v.object({
  */
 const createMapping = async (
   supabase: SupabaseClient,
-  knowledgeSuggestionId: number,
-  gitHubDocFilePathId: number,
+  knowledgeSuggestionId: string,
+  gitHubDocFilePathId: string,
   updatedAt: string,
 ) => {
   const { error: mappingError } = await supabase
@@ -49,7 +49,7 @@ const createMapping = async (
 const handleDocFilePath = async (
   supabase: SupabaseClient,
   suggestion: { projectId: string; path: string; type: string },
-  suggestionId: number,
+  suggestionId: string,
 ) => {
   // Check if there's a GitHubDocFilePath entry for this path
   const { data: docFilePath } = await supabase

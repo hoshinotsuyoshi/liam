@@ -7,7 +7,7 @@ import styles from './EditableContent.module.css'
 
 type EditableContentProps = {
   content: string
-  suggestionId: number
+  suggestionId: string
   className?: string
   originalContent: string | null
   isApproved: boolean

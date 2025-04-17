@@ -7,7 +7,7 @@ import { addReviewFeedbackComment } from '../../../actions/reviewFeedbackComment
 import styles from './CommentForm.module.css'
 
 interface CommentFormProps {
-  reviewFeedbackId: number
+  reviewFeedbackId: string
   onCommentAdded: () => void
 }
 

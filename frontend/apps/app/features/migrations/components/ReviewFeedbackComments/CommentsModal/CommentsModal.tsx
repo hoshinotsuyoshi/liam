@@ -10,7 +10,7 @@ import styles from './CommentsModal.module.css'
 interface CommentsModalProps {
   isOpen: boolean
   onClose: () => void
-  reviewFeedbackId: number
+  reviewFeedbackId: string
   refreshTrigger: number
   onCommentAdded: () => void
   onCommentsLoaded?: (count: number) => void

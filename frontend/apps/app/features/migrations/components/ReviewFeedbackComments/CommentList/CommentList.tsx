@@ -6,7 +6,7 @@ import { getReviewFeedbackComments } from '../../../actions/reviewFeedbackCommen
 import styles from './CommentList.module.css'
 
 interface CommentListProps {
-  reviewFeedbackId: number
+  reviewFeedbackId: string
   refreshTrigger: number
   onCommentsLoaded?: (count: number) => void
 }

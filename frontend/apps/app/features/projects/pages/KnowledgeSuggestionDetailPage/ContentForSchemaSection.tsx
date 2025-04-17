@@ -20,7 +20,7 @@ type ProcessedResult = {
 
 type Props = {
   suggestionContent: string
-  suggestionId: number
+  suggestionId: string
   originalContent: string | null
   isApproved: boolean
   schema: Schema | undefined

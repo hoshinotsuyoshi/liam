@@ -11,7 +11,7 @@ import { ContentForSchema } from './ContentForSchema'
 import styles from './KnowledgeSuggestionDetailPage.module.css'
 
 async function getSuggestionWithProject(
-  suggestionId: number,
+  suggestionId: string,
   projectId: string,
 ) {
   const supabase = await createClient()

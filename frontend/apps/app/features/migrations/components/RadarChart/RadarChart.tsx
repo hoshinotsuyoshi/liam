@@ -15,7 +15,7 @@ export type CategoryEnum = (typeof categoryEnum)[keyof typeof categoryEnum]
 
 export type ReviewScore = {
   id: number
-  overallReviewId: number
+  overallReviewId: string
   overallScore: number
   category: CategoryEnum
 }
