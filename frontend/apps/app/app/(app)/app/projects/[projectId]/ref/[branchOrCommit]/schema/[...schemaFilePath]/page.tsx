@@ -20,7 +20,7 @@ import ERDViewer from './erdViewer'
 const processOverrideFile = async (
   repositoryFullName: string,
   branchOrCommit: string,
-  installationId: string | number,
+  installationId: number,
   schema: Schema,
 ) => {
   const { content: overrideContent } = await getFileContent(

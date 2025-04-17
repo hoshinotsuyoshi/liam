@@ -28,7 +28,7 @@ describe.skip('postComment', () => {
     id: '9999',
     name: 'test-repo',
     owner: 'test-owner',
-    installationId: '12345',
+    installationId: 12345,
     isActive: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),

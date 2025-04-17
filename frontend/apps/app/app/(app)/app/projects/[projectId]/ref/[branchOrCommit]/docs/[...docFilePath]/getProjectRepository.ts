@@ -4,7 +4,7 @@ export interface ProjectRepository {
   repository: {
     name: string
     owner: string
-    installationId: string
+    installationId: number
   }
 }
 

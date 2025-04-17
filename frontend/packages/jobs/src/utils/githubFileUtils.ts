@@ -16,7 +16,7 @@ export const fetchSchemaFileContent = async (
   projectId: string,
   branchName: string,
   repositoryFullName: string,
-  installationId: string,
+  installationId: number,
 ): Promise<{ content: string; format: SupportedFormat }> => {
   try {
     const supabase = createClient()

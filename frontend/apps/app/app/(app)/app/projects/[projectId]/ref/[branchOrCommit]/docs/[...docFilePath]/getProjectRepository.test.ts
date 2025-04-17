@@ -12,7 +12,7 @@ describe('getProjectRepository', () => {
       .insert({
         name: 'test-repo',
         owner: 'test-owner',
-        installationId: '12345',
+        installationId: 12345,
         updatedAt: new Date().toISOString(),
       })
       .select()

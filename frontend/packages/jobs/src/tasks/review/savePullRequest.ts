@@ -39,7 +39,7 @@ export type SavePullRequestResult = {
 
 type Repository = {
   id: string
-  installationId: string
+  installationId: number
   owner: string
   name: string
 }

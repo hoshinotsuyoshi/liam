@@ -27,7 +27,7 @@ async function generateERDLink({
   projectId,
   branchRef,
 }: {
-  installationId: string | number
+  installationId: number
   owner: string
   repo: string
   pullNumber: string | number

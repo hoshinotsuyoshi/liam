@@ -17,7 +17,7 @@ export const generateDocsSuggestionTask = task({
     pullRequestNumber: number
     owner: string
     name: string
-    installationId: string
+    installationId: number
     type: 'DOCS'
     branchName: string
     overallReviewId: string
